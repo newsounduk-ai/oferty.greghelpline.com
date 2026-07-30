@@ -1,0 +1,6 @@
+{
+  "name": "Greg Helpline - Wszystkie Oferty",
+  "description": "Niezależny doradca w UK pomagający Polakom bezpłatnie porównać i wybrać internet, energię (prąd/gaz), abonamenty SIM/telefony oraz ubezpieczenia po polsku.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
