@@ -6,7 +6,7 @@ interface AffiliateGridProps {
   title?: string;
   subtitle?: string;
   links: ReferralLink[];
-  serviceTheme?: 'internet' | 'energia' | 'sim' | 'ubezpieczenia';
+  serviceTheme?: 'internet' | 'energia' | 'sim' | 'ubezpieczenia' | 'wakacje';
 }
 
 export default function AffiliateGrid({
@@ -20,14 +20,16 @@ export default function AffiliateGrid({
     internet: 'bg-blue-50/50 border-blue-100 text-blue-900',
     energia: 'bg-amber-50/50 border-amber-100 text-amber-900',
     sim: 'bg-purple-50/50 border-purple-100 text-purple-900',
-    ubezpieczenia: 'bg-emerald-50/50 border-emerald-100 text-emerald-900'
+    ubezpieczenia: 'bg-emerald-50/50 border-emerald-100 text-emerald-900',
+    wakacje: 'bg-teal-50/50 border-teal-100 text-teal-900'
   };
 
   const buttonGradient = {
     internet: 'bg-blue-600 hover:bg-blue-700 text-white',
     energia: 'bg-amber-500 hover:bg-amber-600 text-white',
     sim: 'bg-indigo-600 hover:bg-indigo-700 text-white',
-    ubezpieczenia: 'bg-emerald-600 hover:bg-emerald-700 text-white'
+    ubezpieczenia: 'bg-emerald-600 hover:bg-emerald-700 text-white',
+    wakacje: 'bg-teal-600 hover:bg-teal-700 text-white'
   };
 
   return (

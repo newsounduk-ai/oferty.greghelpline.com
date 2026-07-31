@@ -71,7 +71,7 @@ export default function InsuranceChecklist({ onCtaClick }: InsuranceChecklistPro
             Co warto przygotować przed bezpłatną konsultacją?
           </h2>
           <p className="mt-3 text-xs md:text-sm text-gray-600 leading-relaxed font-sans">
-            Sprawdź listę pytań, które zada licencjonowany brytyjski broker ubezpieczeniowy.
+            Sprawdź listę pytań, które zada licencjonowany brytyjski ubezpieczyciel podczas rozmowy.
           </p>
         </div>
 
@@ -155,7 +155,7 @@ export default function InsuranceChecklist({ onCtaClick }: InsuranceChecklistPro
               <div className="bg-emerald-950/60 border border-emerald-800/80 rounded-2xl p-4 text-xs text-emerald-200 space-y-2 font-sans mb-6">
                 <div className="font-bold text-white">Dlaczego warto?</div>
                 <div>✓ 100% Darmowa pomoc i brak prowizji pobieranej od klienta</div>
-                <div>✓ Porównanie autoryzowanych brytyjskich brokerów FCA</div>
+                <div>✓ Podajemy kontakt do licencjonowanych brytyjskich ubezpieczycieli FCA</div>
               </div>
             </div>
 

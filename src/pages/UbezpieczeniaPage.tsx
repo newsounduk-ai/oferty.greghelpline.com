@@ -14,7 +14,7 @@ export default function UbezpieczeniaPage() {
     },
     {
       question: "Czy polskie zniżki za bezszkodową jazdę (No Claims Bonus) są uznawane w UK?",
-      answer: "Pewni dostawcy ubezpieczeń komunikacyjnych w UK uznają zaświadczenia o bezszkodowej jazdy z Polski wydane w języku angielskim lub przetłumaczone przysięgle. Pomagamy w przekazaniu dokumentów brokerowi."
+      answer: "Pewni dostawcy ubezpieczeń komunikacyjnych w UK uznają zaświadczenia o bezszkodowej jazdy z Polski wydane w języku angielskim lub przetłumaczone przysięgle. Pomagamy w przekazaniu dokumentów wybranemu ubezpieczycielowi."
     },
     {
       question: "Co to jest ubezpieczenie spłaty kredytu hipotecznego (Mortgage Protection)?",
@@ -22,7 +22,7 @@ export default function UbezpieczeniaPage() {
     },
     {
       question: "Czy porada ubezpieczeniowa Greg Helpline jest darmowa?",
-      answer: "Tak, wstępna analiza i połączenie z autoryzowanym brokerem licencjonowanym przez FCA (Financial Conduct Authority) są bezpłatne."
+      answer: "Tak, wstępna analiza i przekazanie kontaktu do wybranego ubezpieczyciela licencjonowanego przez FCA (Financial Conduct Authority) są bezpłatne."
     }
   ];
 
@@ -98,7 +98,7 @@ export default function UbezpieczeniaPage() {
       <section className="py-8 bg-white border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs font-mono font-bold uppercase tracking-wider text-gray-400 mb-6">
-            Współpracujemy z licencjonowanymi brytyjskimi brokerami FCA:
+            Podajemy kontakt do wybranego ubezpieczyciela — to on skontaktuje się z Tobą i umówi termin rozmowy:
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 font-display font-black text-sm md:text-base text-gray-700">
             <span className="bg-blue-50 text-blue-900 px-4 py-2 rounded-xl border border-blue-200">Bupa Health</span>

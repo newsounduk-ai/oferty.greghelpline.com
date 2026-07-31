@@ -30,7 +30,7 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
             </div>
 
             <p className="text-xs text-blue-200/80 leading-relaxed max-w-sm">
-              Niezależny, autoryzowany polski doradca w Wielkiej Brytanii. Bezpłatnie dobieramy najtańsze taryfy energii, najszybszy światłowód, elastyczne pakiety SIM oraz bezpieczne ubezpieczenia w UK.
+              Niezależny, autoryzowany polski doradca w Wielkiej Brytanii. Bezpłatnie dobieramy najtańsze taryfy energii, najszybszy światłowód, elastyczne pakiety SIM, bezpieczne ubezpieczenia oraz wymarzone wakacje i wycieczki z UK.
             </p>
 
             <div className="flex items-center gap-2 pt-2 text-xs text-amber-400 font-semibold">
@@ -63,6 +63,11 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
               <li>
                 <NavLink to="/ubezpieczenia" className="hover:text-amber-400 transition-colors flex items-center gap-2">
                   <span>•</span> Ubezpieczenia Zdrowotne & Auto
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/wakacje" className="hover:text-amber-400 transition-colors flex items-center gap-2">
+                  <span>•</span> Wakacje i Wycieczki z UK
                 </NavLink>
               </li>
             </ul>
@@ -174,7 +179,7 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
                 <div>
                   <h4 className="font-bold text-gray-900 mb-1">1. Administrator Danych</h4>
                   <p>
-                    Administratorem Twoich danych osobowych przekazywanych w celach porównania i wyboru usług (Internet, Energia, SIM, Ubezpieczenia) jest Greg Helpline z siedzibą w Wielkiej Brytanii (kontakt: kontakt@greghelpline.co.uk).
+                    Administratorem Twoich danych osobowych przekazywanych w celach porównania i wyboru usług (Internet, Energia, SIM, Ubezpieczenia, Wakacje) jest Greg Helpline z siedzibą w Wielkiej Brytanii (kontakt: kontakt@greghelpline.co.uk).
                   </p>
                 </div>
 

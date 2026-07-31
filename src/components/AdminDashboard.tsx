@@ -3,7 +3,7 @@ import {
   Users, UserCheck, Inbox, CheckCircle, XCircle, Search, 
   Download, RefreshCw, Trash2, Lock, Key,
   Activity, ArrowRightLeft, Radio, BellRing, ChevronRight, Save, Play,
-  Wifi, Zap, Smartphone, ShieldCheck, Edit2, X
+  Wifi, Zap, Smartphone, ShieldCheck, Palmtree, Edit2, X
 } from 'lucide-react';
 import { Lead, LeadStatus, ActivityLog, WebhookConfig, CRMStats, ServiceType } from '../types';
 
@@ -232,6 +232,8 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
         return <span className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-md"><Smartphone className="w-3 h-3" /> SIM</span>;
       case 'ubezpieczenia':
         return <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-md"><ShieldCheck className="w-3 h-3" /> Ubezpieczenia</span>;
+      case 'wakacje':
+        return <span className="inline-flex items-center gap-1 bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded-md"><Palmtree className="w-3 h-3" /> Wakacje</span>;
       default:
         return <span className="inline-flex items-center gap-1 bg-gray-100 text-gray-800 text-[10px] font-bold px-2 py-0.5 rounded-md">Ogólne</span>;
     }
@@ -376,6 +378,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
           { key: 'energia', label: 'Energia', icon: Zap },
           { key: 'sim', label: 'SIM & Telefony', icon: Smartphone },
           { key: 'ubezpieczenia', label: 'Ubezpieczenia', icon: ShieldCheck },
+          { key: 'wakacje', label: 'Wakacje & Podróże', icon: Palmtree },
         ].map((tab) => {
           const Icon = tab.icon;
           const isActive = serviceFilter === tab.key;
@@ -558,6 +561,8 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
                           {lead.monthlyBill && <span>💰 {lead.monthlyBill}</span>}
                           {lead.simNeed && <span>📱 {lead.simNeed}</span>}
                           {lead.insuranceType && <span>🛡️ {lead.insuranceType}</span>}
+                          {lead.vacationType && <span>🌴 {lead.vacationType} ({lead.vacationTerm || ''})</span>}
+                          {lead.travelersCount && <span>👥 {lead.travelersCount}</span>}
                         </div>
                       </div>
 

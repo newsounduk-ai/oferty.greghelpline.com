@@ -74,18 +74,23 @@ const reviewsList: Review[] = [
   }
 ];
 
-export default function ReviewsSlider() {
+interface ReviewsSliderProps {
+  reviews?: Review[];
+}
+
+export default function ReviewsSlider({ reviews }: ReviewsSliderProps) {
+  const listToUse = reviews && reviews.length > 0 ? reviews : reviewsList;
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
 
   const slideNext = () => {
     setDirection(1);
-    setActiveIndex((prev) => (prev + 1) % reviewsList.length);
+    setActiveIndex((prev) => (prev + 1) % listToUse.length);
   };
 
   const slidePrev = () => {
     setDirection(-1);
-    setActiveIndex((prev) => (prev - 1 + reviewsList.length) % reviewsList.length);
+    setActiveIndex((prev) => (prev - 1 + listToUse.length) % listToUse.length);
   };
 
   // Autoplay functionality with easy hover pause
@@ -94,9 +99,9 @@ export default function ReviewsSlider() {
       slideNext();
     }, 6000);
     return () => clearInterval(timer);
-  }, [activeIndex]);
+  }, [activeIndex, listToUse.length]);
 
-  const currentReview = reviewsList[activeIndex];
+  const currentReview = listToUse[activeIndex];
 
   return (
     <div className="relative max-w-4xl mx-auto px-4 py-8" id="opinie-slider">
@@ -158,7 +163,7 @@ export default function ReviewsSlider() {
         <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-100 relative z-20">
           {/* Progress dots */}
           <div className="flex gap-1.5">
-            {reviewsList.map((_, idx) => (
+            {listToUse.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => {

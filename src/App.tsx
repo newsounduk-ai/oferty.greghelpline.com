@@ -12,6 +12,7 @@ import InternetPage from './pages/InternetPage';
 import EnergiaPage from './pages/EnergiaPage';
 import SimPage from './pages/SimPage';
 import UbezpieczeniaPage from './pages/UbezpieczeniaPage';
+import WakacjePage from './pages/WakacjePage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -97,6 +98,7 @@ export default function App() {
             <Route path="/energia" element={<EnergiaPage />} />
             <Route path="/sim" element={<SimPage />} />
             <Route path="/ubezpieczenia" element={<UbezpieczeniaPage />} />
+            <Route path="/wakacje" element={<WakacjePage />} />
           </Routes>
         </main>
 

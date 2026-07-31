@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Phone, Wifi, Zap, Smartphone, ShieldCheck, Menu, X, ShieldAlert } from 'lucide-react';
+import { Phone, Wifi, Zap, Smartphone, ShieldCheck, Palmtree, Menu, X, ShieldAlert } from 'lucide-react';
 import { ServiceType } from '../types';
 
 export default function Header() {
@@ -39,6 +39,14 @@ export default function Header() {
       color: 'text-emerald-500',
       activeBg: 'bg-emerald-50 text-emerald-800',
       badge: 'Ochrona'
+    },
+    {
+      path: '/wakacje',
+      label: 'Wakacje',
+      icon: Palmtree,
+      color: 'text-teal-500',
+      activeBg: 'bg-teal-50 text-teal-800',
+      badge: 'Podróże'
     }
   ];
 

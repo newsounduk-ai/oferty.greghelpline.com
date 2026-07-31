@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Wifi, Zap, Smartphone, ShieldCheck, Phone, ArrowRight, CheckCircle2, Sparkles, Star, Users } from 'lucide-react';
+import { Wifi, Zap, Smartphone, ShieldCheck, Palmtree, Phone, ArrowRight, CheckCircle2, Sparkles, Star, Users } from 'lucide-react';
 import MultiStepForm from '../components/MultiStepForm';
 import AffiliateGrid from '../components/AffiliateGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
@@ -34,7 +34,7 @@ export default function HomePage() {
       id: 'sim' as ServiceType,
       path: '/sim',
       title: 'SIM & Telefony',
-      subtitle: 'Kart SIM-only od £6/m-c bez umowy',
+      subtitle: 'Karty SIM-only od £6/m-c bez umowy',
       icon: Smartphone,
       color: 'bg-indigo-600 text-white',
       badge: 'Nielimitowane 5G'
@@ -47,6 +47,15 @@ export default function HomePage() {
       icon: ShieldCheck,
       color: 'bg-emerald-600 text-white',
       badge: 'Polscy doradcy'
+    },
+    {
+      id: 'wakacje' as ServiceType,
+      path: '/wakacje',
+      title: 'Wakacje & Podróże',
+      subtitle: 'Wczasy, City Break, All Inclusive z UK',
+      icon: Palmtree,
+      color: 'bg-teal-600 text-white',
+      badge: 'Najlepsze ceny'
     }
   ];
 
@@ -54,7 +63,8 @@ export default function HomePage() {
   const allLinks = [
     ...referralLinks.internet.slice(0, 2),
     ...referralLinks.sim.slice(0, 2),
-    ...referralLinks.energia.slice(0, 1)
+    ...referralLinks.energia.slice(0, 1),
+    ...referralLinks.wakacje.slice(0, 1)
   ];
 
   return (
@@ -82,7 +92,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">
-                Pomagamy Polakom w Wielkiej Brytanii w wyborze najtańszego internetu, energii (prąd i gaz), kart SIM/abonamentów oraz bezpiecznych ubezpieczeń. Cała obsługa w języku polskim!
+                Pomagamy Polakom w Wielkiej Brytanii w wyborze najtańszego internetu, energii (prąd i gaz), kart SIM/abonamentów, bezpiecznych ubezpieczeń oraz wymarzonych wakacji i wycieczek z UK. Cała obsługa w języku polskim!
               </p>
 
               {/* Trust Badges */}
@@ -174,14 +184,14 @@ export default function HomePage() {
           
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="font-display font-black text-2xl md:text-4xl text-[#0B1F3A] tracking-tight">
-              Zobacz szczegóły naszych 4 głównych usług
+              Zobacz szczegóły naszych 5 głównych usług
             </h2>
             <p className="mt-2 text-xs md:text-sm text-gray-600 font-sans">
               Kliknij w wybraną zakładkę, aby poznać aktualne promocje i wyliczyć oszczędności.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {services.map((serv) => {
               const Icon = serv.icon;
               return (

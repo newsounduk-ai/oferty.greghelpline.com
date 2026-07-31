@@ -9,7 +9,7 @@ import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { Lead, LeadStatus, ActivityLog, WebhookConfig, CRMStats, ServiceType } from './src/types';
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const app = express();
 
 app.use(express.json());
@@ -126,6 +126,27 @@ const defaultLeads: Lead[] = [
     },
     notes: 'Przejście z powolnego VDSL na pełny światłowód Hyperoptic.',
     createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'lead_7',
+    service: 'wakacje',
+    name: 'Michał Adamski',
+    phone: '07491 978400',
+    email: 'm.adamski@gmail.com',
+    vacationType: 'all_inclusive',
+    vacationTerm: 'Lato / Wakacje 2026',
+    travelersCount: 'Rodzina 2+2',
+    budgetPerPerson: '£600 - £1000',
+    consent: true,
+    status: 'contacted',
+    finalizedOffer: {
+      operatorOrSupplier: 'Trip.com / TUI',
+      planOrTariff: 'All Inclusive Costa del Sol (Hiszpania)',
+      priceOrSavings: '£2,800 za całą rodzinę',
+      additionalNotes: 'Propozycja przesłana na email, wylot z Luton.'
+    },
+    notes: 'Zapytanie o wakacje w Hiszpanii z lotami z Luton dla rodziny 2+2.',
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
   }
 ];
 
@@ -253,6 +274,8 @@ app.get('/api/leads', (req, res) => {
         (lead.currentSupplier && lead.currentSupplier.toLowerCase().includes(s)) ||
         (lead.currentNetwork && lead.currentNetwork.toLowerCase().includes(s)) ||
         (lead.insuranceType && lead.insuranceType.toLowerCase().includes(s)) ||
+        (lead.vacationType && lead.vacationType.toLowerCase().includes(s)) ||
+        (lead.vacationTerm && lead.vacationTerm.toLowerCase().includes(s)) ||
         (lead.notes && lead.notes.toLowerCase().includes(s))
     );
   }
@@ -279,7 +302,11 @@ app.post('/api/leads', async (req, res) => {
       currentNetwork,
       dataUsage,
       insuranceType,
-      insuranceDetails
+      insuranceDetails,
+      vacationType,
+      vacationTerm,
+      travelersCount,
+      budgetPerPerson
     } = req.body;
 
     const chosenService: ServiceType = service || 'energia';
@@ -306,7 +333,11 @@ app.post('/api/leads', async (req, res) => {
       ...(currentNetwork && { currentNetwork: currentNetwork.trim() }),
       ...(dataUsage && { dataUsage: dataUsage.trim() }),
       ...(insuranceType && { insuranceType }),
-      ...(insuranceDetails && { insuranceDetails })
+      ...(insuranceDetails && { insuranceDetails }),
+      ...(vacationType && { vacationType }),
+      ...(vacationTerm && { vacationTerm: vacationTerm.trim() }),
+      ...(travelersCount && { travelersCount: travelersCount.trim() }),
+      ...(budgetPerPerson && { budgetPerPerson: budgetPerPerson.trim() })
     };
 
     leads.push(newLead);
@@ -316,7 +347,8 @@ app.post('/api/leads', async (req, res) => {
       internet: 'Internet',
       energia: 'Energia',
       sim: 'SIM i Telefony',
-      ubezpieczenia: 'Ubezpieczenia'
+      ubezpieczenia: 'Ubezpieczenia',
+      wakacje: 'Wakacje i Podróże'
     };
 
     // 1. Log activity
@@ -460,6 +492,7 @@ app.get('/api/stats', (req, res) => {
     energia: leads.filter(l => l.service === 'energia').length,
     sim: leads.filter(l => l.service === 'sim').length,
     ubezpieczenia: leads.filter(l => l.service === 'ubezpieczenia').length,
+    wakacje: leads.filter(l => l.service === 'wakacje').length,
   };
 
   const stats: CRMStats = {
@@ -557,7 +590,8 @@ app.get('/api/export', (req, res) => {
     internet: 'Internet',
     energia: 'Energia',
     sim: 'SIM i Telefony',
-    ubezpieczenia: 'Ubezpieczenia'
+    ubezpieczenia: 'Ubezpieczenia',
+    wakacje: 'Wakacje i Podróże'
   };
 
   const rows = leads.map(lead => [
@@ -568,7 +602,7 @@ app.get('/api/export', (req, res) => {
     lead.email,
     [lead.postcode, lead.houseNumber].filter(Boolean).join(' '),
     lead.currentSupplier || lead.currentNetwork || '',
-    lead.monthlyBill || lead.dataUsage || lead.insuranceType || '',
+    lead.monthlyBill || lead.dataUsage || lead.insuranceType || lead.vacationType || '',
     lead.status,
     lead.createdAt,
     lead.finalizedOffer?.operatorOrSupplier || lead.newSupplier || lead.operator || '',

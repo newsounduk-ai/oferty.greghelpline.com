@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export type ServiceType = 'internet' | 'energia' | 'sim' | 'ubezpieczenia';
+export type ServiceType = 'internet' | 'energia' | 'sim' | 'ubezpieczenia' | 'wakacje';
 
 export type LeadStatus = 'new' | 'contacted' | 'finalized' | 'rejected';
 
@@ -34,6 +34,12 @@ export interface Lead {
   // Insurance specific
   insuranceType?: 'health' | 'car' | 'life' | 'travel';
   insuranceDetails?: Record<string, any> | string;
+
+  // Vacation / Travel specific
+  vacationType?: 'all_inclusive' | 'city_break' | 'tour' | 'need_advice' | string;
+  vacationTerm?: string;
+  travelersCount?: string;
+  budgetPerPerson?: string;
   
   // Finalized offer details
   finalizedOffer?: {
@@ -88,7 +94,7 @@ export interface ReferralLink {
   id: string;
   name: string;
   url: string;
-  service: 'internet' | 'energia' | 'sim';
+  service: 'internet' | 'energia' | 'sim' | 'wakacje';
   badge?: string;
   description: string;
   logoText?: string;

@@ -189,8 +189,22 @@ export const ENERGY_REFLINKS: ReferralLink[] = [
   }
 ];
 
+export const TRAVEL_REFLINKS: ReferralLink[] = [
+  {
+    id: 'tripdotcom',
+    name: 'Trip.com',
+    url: 'https://www.trip.com/?Allianceid=8628698&SID=318760044&trip_sub1=&trip_sub3=D17794457',
+    service: 'wakacje',
+    badge: 'Hotele, Loty i Wczasy',
+    description: 'Ogromny wybór tanich przelotów, hoteli, biletów na atrakcje oraz kompletnych pakietów wakacyjnych z gwarancją najlepszych cen.',
+    logoText: 'Trip.com',
+    color: 'from-teal-600 to-cyan-600'
+  }
+];
+
 export const referralLinks = {
   internet: INTERNET_REFLINKS,
   sim: SIM_REFLINKS,
-  energia: ENERGY_REFLINKS
+  energia: ENERGY_REFLINKS,
+  wakacje: TRAVEL_REFLINKS
 };

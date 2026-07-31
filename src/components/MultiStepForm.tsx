@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, ArrowRight, Loader2, Search, Zap, Wifi, Smartphone, ShieldCheck, User, Phone, Mail, Sparkles } from 'lucide-react';
+import { Check, ArrowRight, Loader2, Search, Zap, Wifi, Smartphone, ShieldCheck, Palmtree, User, Phone, Mail, Sparkles } from 'lucide-react';
 import { ServiceType } from '../types';
 
 interface MultiStepFormProps {
@@ -29,6 +29,11 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
     // Ubezpieczenia
     insuranceType: 'health' as 'health' | 'car' | 'life' | 'travel',
     insuranceDetailsStr: '',
+    // Wakacje
+    vacationType: 'all_inclusive' as 'all_inclusive' | 'city_break' | 'tour' | 'need_advice',
+    vacationTerm: 'Lato / Wakacje 2026',
+    travelersCount: '2 osoby (para)',
+    budgetPerPerson: '£300 - £600',
     // Contact
     name: '',
     phone: '',
@@ -48,7 +53,7 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
       barColor: 'bg-blue-600',
       step1Title: 'Krok 1: Kod pocztowy',
       step1Subtitle: 'Sprawdzimy dostępność światłowodu (Openreach, Virgin, Community Fibre, CityFibre) pod Twoim adresem.',
-      step2Title: 'Krok 2: Numer domu / mieszkania',
+      step2Title: 'Krok 2: Numer budynku / mieszkania',
       step2Subtitle: 'Potrzebny do dokładnej weryfikacji linii telefonicznej / gniazdka światłowodowego.',
     },
     energia: {
@@ -60,7 +65,7 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
       step1Title: 'Krok 1: Kod pocztowy',
       step1Subtitle: 'Sprawdzimy strefę energetyczną i najtańsze taryfy dostawców prądu i gazu w UK.',
       step2Title: 'Krok 2: Obecny dostawca i rachunki',
-      step2Subtitle: 'Podaj dostawcę oraz średni kwotę miesięczną, by wyliczyć Twoją oszczędność.',
+      step2Subtitle: 'Podaj dostawcę oraz średnią kwotę miesięczną, by wyliczyć Twoją oszczędność.',
     },
     sim: {
       title: 'SIM i Telefony na Abonament',
@@ -83,6 +88,17 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
       step1Subtitle: 'Wybierz polisę, o której chcesz porozmawiać z polskim doradcą.',
       step2Title: 'Krok 2: Podstawowe informacje',
       step2Subtitle: 'Krótki opis sytuacji pomoże nam dobrać najlepszego licencjonowanego ubezpieczyciela.',
+    },
+    wakacje: {
+      title: 'Wakacje i Wycieczki z UK',
+      icon: Palmtree,
+      accentColor: 'bg-teal-600 hover:bg-teal-700 text-white shadow-teal-500/20',
+      badgeColor: 'text-teal-600',
+      barColor: 'bg-teal-600',
+      step1Title: 'Krok 1: Kierunek i rodzaj wyjazdu',
+      step1Subtitle: 'Wybierz typ wakacji oraz orientacyjny termin podróży z lotniska w UK.',
+      step2Title: 'Krok 2: Liczba osób i budżet',
+      step2Subtitle: 'Podaj liczbę podróżujących oraz planowany budżet na osobę w funtach (£).',
     }
   }[service];
 
@@ -182,7 +198,11 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
         currentNetwork: formData.currentNetwork,
         dataUsage: formData.dataUsage,
         insuranceType: formData.insuranceType,
-        insuranceDetails: formData.insuranceDetailsStr
+        insuranceDetails: formData.insuranceDetailsStr,
+        vacationType: formData.vacationType,
+        vacationTerm: formData.vacationTerm,
+        travelersCount: formData.travelersCount,
+        budgetPerPerson: formData.budgetPerPerson
       };
 
       const response = await fetch('/api/leads', {
@@ -393,6 +413,52 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
                 </div>
               )}
 
+              {/* Wakacje Step 1: Destination / Trip Type & Term */}
+              {service === 'wakacje' && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-2">Kierunek / typ wyjazdu</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { id: 'all_inclusive', label: 'Wczasy All-Inclusive', desc: 'Hotele ze słonecznym wyżywieniem' },
+                        { id: 'city_break', label: 'Miasto / City Break', desc: 'Weekendowy wypad w Europie' },
+                        { id: 'tour', label: 'Wycieczka Objazdowa', desc: 'Zwiedzanie i aktywny wypoczynek' },
+                        { id: 'need_advice', label: 'Nie wiem, doradźcie', desc: 'Najlepsze aktualne okazje cenowe' },
+                      ].map((item) => (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, vacationType: item.id as any })}
+                          className={`p-3 rounded-2xl border text-left cursor-pointer transition-all ${
+                            formData.vacationType === item.id
+                              ? 'bg-teal-50 border-teal-500 text-teal-900 shadow-xs font-bold'
+                              : 'bg-gray-50/50 border-gray-200 text-gray-700 hover:bg-gray-100'
+                          }`}
+                        >
+                          <div className="text-xs">{item.label}</div>
+                          <div className="text-[10px] text-gray-500 mt-0.5 font-normal">{item.desc}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1.5">Orientacyjny termin</label>
+                    <select
+                      value={formData.vacationTerm}
+                      onChange={(e) => setFormData({ ...formData, vacationTerm: e.target.value })}
+                      className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-2xl text-xs font-medium"
+                    >
+                      <option value="Najbliższe 2 tygodnie (Last Minute)">Najbliższe 2 tygodnie (Last Minute)</option>
+                      <option value="Lato / Wakacje 2026">Lato / Wakacje (Czerwiec - Sierpień)</option>
+                      <option value="Jesień 2026">Jesień (Wrzesień - Listopad)</option>
+                      <option value="Zima / Ferie 2026/27">Zima / Ferie zimowe</option>
+                      <option value="Wiosna 2027">Wiosna (Marzec - Maj)</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+
             </div>
 
             <div className="mt-6">
@@ -547,6 +613,51 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
                     placeholder="np. Szukam ubezpieczenia zdrowotnego dla rodziny 2+1 lub ubezpieczenia auta Ford Focus 2020."
                     className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-2xl text-xs"
                   />
+                </div>
+              )}
+
+              {/* Wakacje Step 2: Travelers count & Budget per person */}
+              {service === 'wakacje' && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1.5">Liczba osób podróżujących</label>
+                    <select
+                      value={formData.travelersCount}
+                      onChange={(e) => setFormData({ ...formData, travelersCount: e.target.value })}
+                      className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-2xl text-xs font-medium"
+                    >
+                      <option value="1 osoba (Solo traveller)">1 osoba (Solo traveller)</option>
+                      <option value="2 osoby (Para / Małżeństwo)">2 osoby (Para / Małżeństwo)</option>
+                      <option value="Rodzina 2+1">Rodzina (2 dorosłych + 1 dziecko)</option>
+                      <option value="Rodzina 2+2">Rodzina (2 dorosłych + 2 dzieci)</option>
+                      <option value="Grupa 5+ osób">Większa grupa (5+ osób)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1.5">Orientacyjny budżet na osobę (£)</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { id: 'do £300', label: 'Do £300 / os.' },
+                        { id: '£300 - £600', label: '£300 - £600 / os.' },
+                        { id: '£600 - £1000', label: '£600 - £1000 / os.' },
+                        { id: '£1000+', label: 'Powyżej £1000 / os.' },
+                      ].map((item) => (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, budgetPerPerson: item.id })}
+                          className={`p-2.5 rounded-xl border text-center text-xs font-bold cursor-pointer transition-all ${
+                            formData.budgetPerPerson === item.id
+                              ? 'bg-teal-50 border-teal-500 text-teal-900 shadow-xs'
+                              : 'bg-gray-50/50 border-gray-200 text-gray-700 hover:bg-gray-100'
+                          }`}
+                        >
+                          {item.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
 
