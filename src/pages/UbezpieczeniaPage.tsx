@@ -126,6 +126,9 @@ export default function UbezpieczeniaPage() {
         </div>
       </section>
 
+      {/* BEZPŁATNY PORADNIK PDF */}
+      <GuideDownloadCTA service="ubezpieczenia" />
+
       {/* FAQ */}
       <section className="py-16 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -137,8 +140,6 @@ export default function UbezpieczeniaPage() {
           <FaqSection items={ubezpieczeniaFaq} />
         </div>
       </section>
-
-      <GuideDownloadCTA service="ubezpieczenia" />
 
     </div>
   );

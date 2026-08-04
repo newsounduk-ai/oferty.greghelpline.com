@@ -6,8 +6,6 @@ import { X, Check, Phone } from 'lucide-react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
-import ExitIntentGuidePopup from './components/ExitIntentGuidePopup';
-import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 import HomePage from './pages/HomePage';
 import InternetPage from './pages/InternetPage';
@@ -18,6 +16,8 @@ import WakacjePage from './pages/WakacjePage';
 import BlogIndexPage from './pages/BlogIndexPage';
 import BlogPostPage from './pages/BlogPostPage';
 import GuidesLibraryPage from './pages/GuidesLibraryPage';
+import ExitIntentGuidePopup from './components/ExitIntentGuidePopup';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 function ScrollToTop() {
 
@@ -113,6 +113,10 @@ export default function App() {
 
         {/* Global Footer */}
         <Footer onOpenAdmin={() => setShowAdminModal(true)} />
+
+        {/* Exit Intent Popup & Floating WhatsApp Button */}
+        <ExitIntentGuidePopup />
+        <FloatingWhatsApp />
 
         {/* Mobile Floating Sticky CTA */}
         <div className="sm:hidden fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-md py-3 px-4 border-t border-gray-200 z-40 flex items-center justify-between shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">
@@ -252,13 +256,6 @@ export default function App() {
         </AnimatePresence>
 
       </div>
-
-      {/* Exit-intent / scroll / timer triggered guide popup (per-service) */}
-      <ExitIntentGuidePopup />
-
-      {/* Floating WhatsApp button */}
-      <FloatingWhatsApp />
-
     </BrowserRouter>
   );
 }

@@ -139,6 +139,9 @@ export default function InternetPage() {
         </div>
       </section>
 
+      {/* BEZPŁATNY PORADNIK PDF */}
+      <GuideDownloadCTA service="internet" />
+
       {/* FAQ */}
       <section className="py-16 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -150,8 +153,6 @@ export default function InternetPage() {
           <FaqSection items={internetFaq} />
         </div>
       </section>
-
-      <GuideDownloadCTA service="internet" />
 
     </div>
   );

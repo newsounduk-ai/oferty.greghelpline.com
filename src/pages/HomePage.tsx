@@ -5,8 +5,6 @@ import MultiStepForm from '../components/MultiStepForm';
 import AffiliateGrid from '../components/AffiliateGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection from '../components/FaqSection';
-import GuideDownloadCTA from '../components/GuideDownloadCTA';
-import { GENERAL_GUIDE } from '../data/guidesData';
 import { referralLinks } from '../data/reflinks';
 import { ServiceType } from '../types';
 
@@ -84,9 +82,20 @@ export default function HomePage() {
             {/* Left Col: Main Text */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 border border-blue-200/80 text-blue-900 text-xs font-bold uppercase tracking-wider shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                Polski Doradca w UK • 100% Bezpłatna Pomoc
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 border border-blue-200/80 text-blue-900 text-xs font-bold uppercase tracking-wider shadow-xs">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  Polski Doradca w UK • 100% Bezpłatna Pomoc
+                </div>
+
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-xs font-bold text-amber-900 shadow-xs">
+                  <img
+                    src="/41242265-adb5-402b-8aff-f8d0bfb77511.jpg"
+                    alt="Grzegorz (Greg)"
+                    className="w-6 h-6 rounded-full object-cover border-2 border-amber-400 shrink-0"
+                  />
+                  <span>Grzegorz (Greg)</span>
+                </div>
               </div>
 
               <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-[#0B1F3A] tracking-tight leading-[1.1]">
@@ -273,8 +282,6 @@ export default function HomePage() {
           <FaqSection />
         </div>
       </section>
-
-      <GuideDownloadCTA guide={GENERAL_GUIDE} />
 
     </div>
   );

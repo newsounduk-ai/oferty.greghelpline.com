@@ -12,7 +12,7 @@ export const BLOG_POSTS: BlogPost[] = [
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'Planujesz zmianę internetu w domu, ale obawiasz się przerw w łączności lub barier językowych w rozmowie z konsultantami? Zobacz prosty poradnik krok po kroku.',
     ctaUrl: '/internet',
@@ -99,7 +99,7 @@ Szukasz szybszego i tańszego internetu domowego bez barier językowych? Wypełn
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'Skróty FTTC, FTTP, Mbps, Gigafast mogą zawrócić w głowie. Sprawdź, jaka prędkość internetu domowego w Wielkiej Brytanii naprawdę odpowiada potrzebom Twoim i Twojej rodziny.',
     ctaUrl: '/internet',
@@ -193,7 +193,7 @@ Chcesz dowiedzieć się, jaki światłowód dochodzi do Twojego domu w Wielkiej 
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'Rachunki za prąd i gaz potrafią mocno uderzyć po kieszeni. Poznaj sprawdzone nawyki, zasady taryfowe oraz metody, które pozwalają zaoszczędzić setki funtów rocznie w Wielkiej Brytanii.',
     ctaUrl: '/energia',
@@ -270,7 +270,7 @@ Płacisz zbyt wysokie rachunki za prąd i gaz? Przejdź na naszą podstronę [En
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'Masz dość pilnowania 4 różnych przelewów do 4 różnych firm w każdym miesiącu? Sprawdź, jak połączenie wszystkich domowych rachunków w jeden daje oszczędność i święty spokój.',
     ctaUrl: '/energia',
@@ -344,7 +344,7 @@ Chcesz uprościć swoje domowe finanse i płacić mniej za wszystkie media w Wie
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'Chcesz zmienić sieć komórkową w Wielkiej Brytanii na tańszą, ale boisz się utraty swojego dotychczasowego numeru? Zobacz, jak działa darmowy kod PAC.',
     ctaUrl: '/sim',
@@ -420,7 +420,7 @@ Szukasz najtańszego abonamentu komórkowego lub oferty SIM-only z nielimitowany
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'Ceny ubezpieczeń samochodowych w Wielkiej Brytanii dla młodych lub nowych kierowców bywają kosmiczne. Nie daj się skusić popularnej "metodzie na rodzica", bo to przestępstwo.',
     ctaUrl: '/ubezpieczenia',
@@ -506,7 +506,7 @@ Szukasz bezpiecznej, legalnej i dopasowanej polisy ubezpieczeniowej w Wielkiej B
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'W Polsce ubezpiecza się auto, a w Wielkiej Brytanii... kierowcę! Zobacz, dlaczego brytyjski system ubezpieczeń komunikacyjnych tak zaskakuje polskich kierowców.',
     ctaUrl: '/ubezpieczenia',
@@ -593,7 +593,7 @@ Potrzebujesz pomocy w zorganizowaniu ubezpieczenia auta w Wielkiej Brytanii lub 
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'Brytyjska państwowa służba zdrowia (NHS) jest bezpłatna, ale kolejki do specjalistów i zabiegów bywają bardzo długie. Zobacz, jak prywatna polisa chroni zdrowie Twoje i Twojej rodziny.',
     ctaUrl: '/ubezpieczenia',
@@ -665,7 +665,7 @@ Chcesz zabezpieczyć zdrowie i finanse swojej rodziny w Wielkiej Brytanii? Skont
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'Fałszywi brokerzy ubezpieczeniowi (ghost broking), nieistniejące mieszkania do wynajęcia, naciąganie na zaległy prąd czy podrabiane wiadomości z HMRC. Sprawdź, jak chronić swoje pieniądze.',
     ctaUrl: '/kontakt',
@@ -753,7 +753,7 @@ Masz wątpliwości co do umowy, rachunku lub oferty, którą ktoś Ci proponuje 
     author: {
       name: 'Grzegorz (Greg)',
       role: 'Niezależny Doradca Greg Helpline',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80'
+      avatar: '/41242265-adb5-402b-8aff-f8d0bfb77511.jpg'
     },
     summary: 'Mieszkając w Wielkiej Brytanii masz dostęp do ogromnej bazy tanich połączeń lotniczych i pakietów wakacyjnych. Sprawdź, jak polować na okazje cenowe i zaplanować wymarzony urlop.',
     ctaUrl: '/wakacje',

@@ -324,6 +324,9 @@ export default function WakacjePage() {
         <ReviewsSlider reviews={vacationReviews} />
       </section>
 
+      {/* BEZPŁATNY PORADNIK PDF */}
+      <GuideDownloadCTA service="wakacje" />
+
       {/* 8. FAQ SECTION */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
@@ -336,8 +339,6 @@ export default function WakacjePage() {
         </div>
         <FaqSection items={vacationFaq} />
       </section>
-
-      <GuideDownloadCTA service="wakacje" />
 
       {/* BOTTOM CTA BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

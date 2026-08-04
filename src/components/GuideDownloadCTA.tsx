@@ -20,28 +20,19 @@ export default function GuideDownloadCTA({ service, guide: guideProp }: GuideDow
           <div className="shrink-0 w-16 h-20 rounded-xl bg-white border border-gray-200 flex items-center justify-center shadow-sm">
             <Icon className={`w-8 h-8 ${guide.accent.badgeText}`} />
           </div>
-
           <div className="flex-1 space-y-2 text-center sm:text-left">
             <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${guide.accent.badgeBg} ${guide.accent.badgeBorder} border ${guide.accent.badgeText} text-xs font-bold uppercase tracking-wider`}>
               Bezpłatny poradnik PDF
             </div>
-            <h3 className="font-display font-black text-xl sm:text-2xl text-[#0B1F3A]">
-              {guide.title}
-            </h3>
+            <h3 className="font-display font-black text-xl sm:text-2xl text-[#0B1F3A]">{guide.title}</h3>
             <p className="text-sm text-gray-600">{guide.description}</p>
             <div className="flex items-center justify-center sm:justify-start gap-1.5 text-gray-400 text-xs pt-1">
               <Users className="w-3.5 h-3.5" />
               <span>Ponad {guide.downloads.toLocaleString('pl-PL')} pobrań</span>
             </div>
           </div>
-
           <div className="shrink-0 w-full sm:w-auto flex flex-col items-center gap-2">
-            <a
-              href={guide.pdfPath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`w-full sm:w-auto ${guide.accent.button} ${guide.accent.buttonHover} text-white font-sans font-bold px-6 py-3.5 rounded-xl text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer`}
-            >
+            <a href={guide.pdfPath} target="_blank" rel="noopener noreferrer" className={`w-full sm:w-auto ${guide.accent.button} ${guide.accent.buttonHover} text-white font-sans font-bold px-6 py-3.5 rounded-xl text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer`}>
               <Download className="w-4 h-4" />
               <span>Pobierz bezpłatny PDF</span>
             </a>

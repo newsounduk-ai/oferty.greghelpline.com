@@ -137,6 +137,9 @@ export default function SimPage() {
         </div>
       </section>
 
+      {/* BEZPŁATNY PORADNIK PDF */}
+      <GuideDownloadCTA service="sim" />
+
       {/* FAQ */}
       <section className="py-16 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -148,8 +151,6 @@ export default function SimPage() {
           <FaqSection items={simFaq} />
         </div>
       </section>
-
-      <GuideDownloadCTA service="sim" />
 
     </div>
   );
