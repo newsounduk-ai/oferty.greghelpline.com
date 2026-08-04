@@ -100,3 +100,25 @@ export interface ReferralLink {
   logoText?: string;
   color?: string;
 }
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  metaDescription: string;
+  category: ServiceType | 'porady';
+  categoryLabel: string;
+  readTime: string;
+  publishedAt: string;
+  author: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  summary: string;
+  content: string;
+  ctaUrl: string;
+  ctaText: string;
+  ctaButtonText: string;
+  externalLink?: string;
+}
+

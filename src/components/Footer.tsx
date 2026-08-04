@@ -70,6 +70,36 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
                   <span>•</span> Wakacje i Wycieczki z UK
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/blog" className="hover:text-amber-400 transition-colors flex items-center gap-2 text-amber-300 font-bold">
+                  <span>•</span> Poradnik & Artykuły (10)
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/poradniki" className="hover:text-amber-400 transition-colors flex items-center gap-2">
+                  <span>•</span> Biblioteka Poradników PDF
+                </NavLink>
+              </li>
+              <li>
+                <a
+                  href="https://www.greghelpline.com/prawnik"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-amber-400 transition-colors flex items-center gap-2"
+                >
+                  <span>•</span> Pomoc Prawna (greghelpline.com)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.greghelpline.com/ksiegowosc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-amber-400 transition-colors flex items-center gap-2"
+                >
+                  <span>•</span> Księgowość (greghelpline.com)
+                </a>
+              </li>
             </ul>
           </div>
 

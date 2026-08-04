@@ -5,6 +5,7 @@ import MultiStepForm from '../components/MultiStepForm';
 import AffiliateGrid from '../components/AffiliateGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection from '../components/FaqSection';
+import GuideDownloadCTA from '../components/GuideDownloadCTA';
 import { referralLinks } from '../data/reflinks';
 
 export default function InternetPage() {
@@ -149,6 +150,8 @@ export default function InternetPage() {
           <FaqSection items={internetFaq} />
         </div>
       </section>
+
+      <GuideDownloadCTA service="internet" />
 
     </div>
   );

@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Phone, Wifi, Zap, Smartphone, ShieldCheck, Palmtree, Menu, X, ShieldAlert } from 'lucide-react';
+import { Phone, Wifi, Zap, Smartphone, ShieldCheck, Palmtree, BookOpen, FileText, Menu, X, ShieldAlert } from 'lucide-react';
 import { ServiceType } from '../types';
 
-export default function Header() {
+interface HeaderProps {
+  onOpenAdmin?: () => void;
+}
+
+export default function Header({ onOpenAdmin }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const location = useLocation();
 
   const navItems = [
@@ -47,8 +52,25 @@ export default function Header() {
       color: 'text-teal-500',
       activeBg: 'bg-teal-50 text-teal-800',
       badge: 'Podróże'
+    },
+    {
+      path: '/blog',
+      label: 'Poradnik',
+      icon: BookOpen,
+      color: 'text-purple-500',
+      activeBg: 'bg-purple-50 text-purple-800',
+      badge: 'Artykuły'
+    },
+    {
+      path: '/poradniki',
+      label: 'Poradniki PDF',
+      icon: FileText,
+      color: 'text-gray-500',
+      activeBg: 'bg-gray-100 text-gray-800',
+      badge: 'Do pobrania'
     }
   ];
+
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs">

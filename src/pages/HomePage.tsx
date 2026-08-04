@@ -5,6 +5,8 @@ import MultiStepForm from '../components/MultiStepForm';
 import AffiliateGrid from '../components/AffiliateGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection from '../components/FaqSection';
+import GuideDownloadCTA from '../components/GuideDownloadCTA';
+import { GENERAL_GUIDE } from '../data/guidesData';
 import { referralLinks } from '../data/reflinks';
 import { ServiceType } from '../types';
 
@@ -271,6 +273,8 @@ export default function HomePage() {
           <FaqSection />
         </div>
       </section>
+
+      <GuideDownloadCTA guide={GENERAL_GUIDE} />
 
     </div>
   );

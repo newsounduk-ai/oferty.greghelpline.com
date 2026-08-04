@@ -5,6 +5,7 @@ import MultiStepForm from '../components/MultiStepForm';
 import AffiliateGrid from '../components/AffiliateGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection from '../components/FaqSection';
+import GuideDownloadCTA from '../components/GuideDownloadCTA';
 import { referralLinks } from '../data/reflinks';
 
 export default function SimPage() {
@@ -147,6 +148,8 @@ export default function SimPage() {
           <FaqSection items={simFaq} />
         </div>
       </section>
+
+      <GuideDownloadCTA service="sim" />
 
     </div>
   );

@@ -7,6 +7,7 @@ import MultiStepForm from '../components/MultiStepForm';
 import AffiliateGrid from '../components/AffiliateGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection, { FaqItem } from '../components/FaqSection';
+import GuideDownloadCTA from '../components/GuideDownloadCTA';
 import VacationBudgetCalculator from '../components/VacationBudgetCalculator';
 import { referralLinks } from '../data/reflinks';
 
@@ -335,6 +336,8 @@ export default function WakacjePage() {
         </div>
         <FaqSection items={vacationFaq} />
       </section>
+
+      <GuideDownloadCTA service="wakacje" />
 
       {/* BOTTOM CTA BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

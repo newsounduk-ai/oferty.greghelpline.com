@@ -6,6 +6,8 @@ import { X, Check, Phone } from 'lucide-react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
+import ExitIntentGuidePopup from './components/ExitIntentGuidePopup';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 import HomePage from './pages/HomePage';
 import InternetPage from './pages/InternetPage';
@@ -13,8 +15,12 @@ import EnergiaPage from './pages/EnergiaPage';
 import SimPage from './pages/SimPage';
 import UbezpieczeniaPage from './pages/UbezpieczeniaPage';
 import WakacjePage from './pages/WakacjePage';
+import BlogIndexPage from './pages/BlogIndexPage';
+import BlogPostPage from './pages/BlogPostPage';
+import GuidesLibraryPage from './pages/GuidesLibraryPage';
 
 function ScrollToTop() {
+
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -99,6 +105,9 @@ export default function App() {
             <Route path="/sim" element={<SimPage />} />
             <Route path="/ubezpieczenia" element={<UbezpieczeniaPage />} />
             <Route path="/wakacje" element={<WakacjePage />} />
+            <Route path="/blog" element={<BlogIndexPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/poradniki" element={<GuidesLibraryPage />} />
           </Routes>
         </main>
 
@@ -243,6 +252,13 @@ export default function App() {
         </AnimatePresence>
 
       </div>
+
+      {/* Exit-intent / scroll / timer triggered guide popup (per-service) */}
+      <ExitIntentGuidePopup />
+
+      {/* Floating WhatsApp button */}
+      <FloatingWhatsApp />
+
     </BrowserRouter>
   );
 }
