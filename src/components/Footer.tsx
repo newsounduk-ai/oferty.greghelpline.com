@@ -97,8 +97,8 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-amber-400 shrink-0" />
-                <a href="mailto:kontakt@greghelpline.co.uk" className="hover:text-white transition-colors">
-                  kontakt@greghelpline.co.uk
+                <a href="mailto:office@greghelpline.com" className="hover:text-white transition-colors">
+                  office@greghelpline.com
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
@@ -189,7 +189,7 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
                 <div>
                   <h4 className="font-bold text-gray-900 mb-1">1. Administrator Danych</h4>
                   <p>
-                    Administratorem Twoich danych osobowych przekazywanych w celach porównania i wyboru usług (Internet, Energia, SIM, Ubezpieczenia, Wakacje) jest Greg Helpline z siedzibą w Wielkiej Brytanii (kontakt: kontakt@greghelpline.co.uk).
+                    Administratorem Twoich danych osobowych przekazywanych w celach porównania i wyboru usług (Internet, Energia, SIM, Ubezpieczenia, Wakacje) jest Greg Helpline z siedzibą w Wielkiej Brytanii (kontakt: office@greghelpline.com).
                   </p>
                 </div>
 
