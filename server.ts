@@ -9,8 +9,7 @@ import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { Lead, LeadStatus, ActivityLog, WebhookConfig, CRMStats, ServiceType } from './src/types';
 
-const PORT = 3000;
-const app = express();
+const PORT = process.env.PORT || 3000;const app = express();
 
 app.use(express.json());
 
