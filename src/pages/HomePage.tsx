@@ -195,7 +195,7 @@ export default function HomePage() {
           
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="font-display font-black text-2xl md:text-4xl text-[#0B1F3A] tracking-tight">
-              Zobacz szczegóły naszych głównych usług
+              Zobacz szczegóły naszych 5 głównych usług
             </h2>
             <p className="mt-2 text-xs md:text-sm text-gray-600 font-sans">
               Kliknij w wybraną zakładkę, aby poznać aktualne promocje i wyliczyć oszczędności.
@@ -239,127 +239,6 @@ export default function HomePage() {
             })}
           </div>
 
-        </div>
-      </section>
-
-      {/* PROMO SECTION: TELEFONY W ABONAMENCIE */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-[#101827] via-[#0B1F3A] to-slate-900 text-white relative overflow-hidden">
-        {/* Decorative background lights */}
-        <div className="absolute top-0 right-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Left Content */}
-            <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Nowość • Telefony i Smartfony w UK</span>
-              </div>
-
-              <h2 className="font-display font-black text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight">
-                📱 Telefony w abonamencie przez <span className="text-amber-400 underline decoration-amber-400/60 decoration-wavy decoration-2">GregHelpline</span>
-              </h2>
-
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans font-medium">
-                Dobierzemy dla Ciebie najlepszy telefon i abonament w UK — szybko, bezpiecznie i po polsku. Zamów online z dostawą do domu: flagowe modele Apple iPhone, Samsung Galaxy, Google Pixel 11 oraz odnowione smartfony z 12-miesięczną gwarancją.
-              </p>
-
-              {/* Fast perks list */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-semibold text-slate-200">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Wsparcie i doradztwo po polsku</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Google Pixel 11, Galaxy Z & iPhone</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Darmowa i szybka dostawa w UK</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Bezpieczne zamówienia online</span>
-                </div>
-              </div>
-
-              <div className="pt-4 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                <NavLink
-                  to="/telefony"
-                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#0B1F3A] font-extrabold rounded-2xl text-sm transition-all shadow-xl shadow-amber-500/20 flex items-center justify-center gap-3 cursor-pointer transform hover:-translate-y-0.5"
-                >
-                  <Smartphone className="w-5 h-5 text-[#0B1F3A]" />
-                  <span>Sprawdź Ofertę Telefonów</span>
-                  <ArrowRight className="w-4 h-4 text-[#0B1F3A]" />
-                </NavLink>
-
-                <a
-                  href="tel:+447491978400"
-                  className="w-full sm:w-auto px-6 py-4 bg-slate-800/90 hover:bg-slate-800 text-white font-bold rounded-2xl text-sm transition-all border border-slate-700 flex items-center justify-center gap-2 shadow-sm"
-                >
-                  <Phone className="w-4 h-4 text-amber-400" />
-                  <span>07491 978400</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Right Cards Showcase */}
-            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              
-              {/* Feature 1 */}
-              <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-5 border border-slate-700/80 hover:border-amber-400/40 transition-all">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300">
-                    Flagowiec
-                  </span>
-                  <Smartphone className="w-4 h-4 text-amber-400" />
-                </div>
-                <h4 className="font-display font-bold text-base text-white">Google Pixel 11 Family</h4>
-                <p className="text-xs text-slate-300 mt-1">Najnowsze modele Pixel z asystentem AI w abonamencie.</p>
-              </div>
-
-              {/* Feature 2 */}
-              <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-5 border border-slate-700/80 hover:border-amber-400/40 transition-all">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300">
-                    Składane Ekrany
-                  </span>
-                  <Smartphone className="w-4 h-4 text-amber-400" />
-                </div>
-                <h4 className="font-display font-bold text-base text-white">Samsung Galaxy Z Series</h4>
-                <p className="text-xs text-slate-300 mt-1">Galaxy Z Flip8, Galaxy Z Fold8 oraz Z Fold8 Ultra.</p>
-              </div>
-
-              {/* Feature 3 */}
-              <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-5 border border-slate-700/80 hover:border-amber-400/40 transition-all">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300">
-                    Przedłużenie
-                  </span>
-                  <Sparkles className="w-4 h-4 text-amber-400" />
-                </div>
-                <h4 className="font-display font-bold text-base text-white">Vodafone Upgrade</h4>
-                <p className="text-xs text-slate-300 mt-1">Przedłuż umowę Vodafone i wymień telefon na nowszy.</p>
-              </div>
-
-              {/* Feature 4 */}
-              <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-5 border border-slate-700/80 hover:border-amber-400/40 transition-all">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300">
-                    Eko & Oszczędność
-                  </span>
-                  <ShieldCheck className="w-4 h-4 text-amber-400" />
-                </div>
-                <h4 className="font-display font-bold text-base text-white">Refurbished Handset</h4>
-                <p className="text-xs text-slate-300 mt-1">Odnowione smartfony z 12-miesięczną gwarancją.</p>
-              </div>
-
-            </div>
-
-          </div>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Phone, Wifi, Zap, Smartphone, ShieldCheck, Palmtree, BookOpen, Menu, X, FileText, Lock, Scale, Radio } from 'lucide-react';
+import { Phone, Wifi, Zap, Smartphone, ShieldCheck, Palmtree, BookOpen, Menu, X, FileText, Lock, Scale } from 'lucide-react';
 
 interface HeaderProps {
   onOpenAdmin?: () => void;
@@ -29,18 +29,10 @@ export default function Header({ onOpenAdmin }: HeaderProps) {
     },
     {
       path: '/sim',
-      label: 'SIM',
-      icon: Radio,
+      label: 'SIM & Telefony',
+      icon: Smartphone,
       color: 'text-purple-500',
       activeBg: 'bg-purple-50 text-purple-700',
-      badge: 'Karty SIM'
-    },
-    {
-      path: '/telefony',
-      label: 'Telefony',
-      icon: Smartphone,
-      color: 'text-amber-500',
-      activeBg: 'bg-amber-50 text-amber-900',
       badge: 'Abonament'
     },
     {

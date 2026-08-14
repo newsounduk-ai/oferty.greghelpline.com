@@ -202,78 +202,9 @@ export const TRAVEL_REFLINKS: ReferralLink[] = [
   }
 ];
 
-export interface PhoneOfferItem {
-  title: string;
-  description: string;
-  link: string;
-  category: 'Telefony' | 'SIM' | 'Tablet' | string;
-  badge?: string;
-  highlight?: boolean;
-}
-
-export const phoneOffers: PhoneOfferItem[] = [
-  {
-    title: "Google Pixel 11 Family",
-    description: "Najnowsze modele Google Pixel 11 w abonamencie.",
-    link: "https://aklam.io/vfK13OGl",
-    category: "Telefony",
-    badge: "Nowość"
-  },
-  {
-    title: "Samsung Galaxy Z Family",
-    description: "Galaxy Z Flip8, Galaxy Z Fold8 oraz Galaxy Z Fold8 Ultra.",
-    link: "https://aklam.io/puzgYke7",
-    category: "Telefony",
-    badge: "Flagowce"
-  },
-  {
-    title: "Vodafone Upgrade Handset Contract",
-    description: "Przedłuż umowę Vodafone i wymień telefon na nowszy model.",
-    link: "https://aklam.io/vPpWiwSY",
-    category: "Telefony",
-    badge: "Upgrade"
-  },
-  {
-    title: "New Handset Contract",
-    description: "Nowy telefon z abonamentem w atrakcyjnej cenie.",
-    link: "https://aklam.io/6PJ8s61c",
-    category: "Telefony",
-    badge: "Nowy Abonament"
-  },
-  {
-    title: "Refurbished Handset Contract",
-    description: "Telefony odnowione, w pełni sprawne, z gwarancją 12 miesięcy.",
-    link: "https://aklam.io/mvLdCIaN",
-    category: "Telefony",
-    badge: "Eko & Oszczędność"
-  },
-  {
-    title: "SIM Only Deals",
-    description: "Same karty SIM bez telefonu — idealne, jeśli masz już własny telefon.",
-    link: "https://aklam.io/rqdi0tS0",
-    category: "SIM",
-    badge: "Bez Telefonu"
-  },
-  {
-    title: "Connected Tablet Deals",
-    description: "Tablet Samsung Galaxy Tab S10 FE z pakietem danych.",
-    link: "https://aklam.io/hes3h9bC",
-    category: "Tablet",
-    badge: "Tablet 5G"
-  },
-  {
-    title: "Handset Only",
-    description: "Kup sam telefon bez abonamentu.",
-    link: "https://aklam.io/lHKqP4jb",
-    category: "Telefony",
-    badge: "Bez Umowy"
-  }
-];
-
 export const referralLinks = {
   internet: INTERNET_REFLINKS,
   sim: SIM_REFLINKS,
   energia: ENERGY_REFLINKS,
-  wakacje: TRAVEL_REFLINKS,
-  phoneOffers: phoneOffers
+  wakacje: TRAVEL_REFLINKS
 };
