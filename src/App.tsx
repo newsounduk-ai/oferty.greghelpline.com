@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage';
 import InternetPage from './pages/InternetPage';
 import EnergiaPage from './pages/EnergiaPage';
 import SimPage from './pages/SimPage';
+import TelefonyPage from './pages/TelefonyPage';
 import UbezpieczeniaPage from './pages/UbezpieczeniaPage';
 import WakacjePage from './pages/WakacjePage';
 import VpnPage from './pages/VpnPage';
@@ -105,6 +106,7 @@ export default function App() {
             <Route path="/internet" element={<InternetPage />} />
             <Route path="/energia" element={<EnergiaPage />} />
             <Route path="/sim" element={<SimPage />} />
+            <Route path="/telefony" element={<TelefonyPage />} />
             <Route path="/ubezpieczenia" element={<UbezpieczeniaPage />} />
             <Route path="/wakacje" element={<WakacjePage />} />
             <Route path="/vpn" element={<VpnPage />} />

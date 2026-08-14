@@ -57,7 +57,12 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
               </li>
               <li>
                 <NavLink to="/sim" className="hover:text-amber-400 transition-colors flex items-center gap-2">
-                  <span>•</span> SIM i Telefony na Abonament
+                  <span>•</span> Karty SIM-Only
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/telefony" className="hover:text-amber-400 transition-colors flex items-center gap-2 text-amber-300 font-semibold">
+                  <span>•</span> Telefony w Abonamencie
                 </NavLink>
               </li>
               <li>
@@ -71,13 +76,23 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/vpn" className="hover:text-amber-400 transition-colors flex items-center gap-2">
+                  <span>•</span> VPN & Prywatność
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/prawo" className="hover:text-amber-400 transition-colors flex items-center gap-2">
+                  <span>•</span> Prawo i Odszkodowania
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/blog" className="hover:text-amber-400 transition-colors flex items-center gap-2 text-amber-300 font-bold">
-                  <span>•</span> Poradnik & Artykuły (10)
+                  <span>•</span> Poradnik & Artykuły
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/poradniki" className="hover:text-amber-400 transition-colors flex items-center gap-2 text-amber-300 font-bold">
-                  <span>•</span> Bezpłatne Poradniki PDF (7)
+                  <span>•</span> Bezpłatne Poradniki PDF
                 </NavLink>
               </li>
             </ul>
