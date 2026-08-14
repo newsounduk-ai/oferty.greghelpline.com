@@ -2,7 +2,7 @@ import React from 'react';
 import { Smartphone, CheckCircle2, Phone, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 import SimDataEstimator from '../components/SimDataEstimator';
 import MultiStepForm from '../components/MultiStepForm';
-import AffiliateGrid from '../components/AffiliateGrid';
+import SimOffersGrid from '../components/SimOffersGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection from '../components/FaqSection';
 import GuideDownloadCTA from '../components/GuideDownloadCTA';
@@ -117,13 +117,36 @@ export default function SimPage() {
       {/* CALCULATOR */}
       <SimDataEstimator />
 
+      {/* CALLOUT BANNER FOR TELEFONY */}
+      <section className="py-8 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-[#101827] via-[#0B1F3A] to-slate-900 rounded-3xl p-6 sm:p-8 border border-amber-400/40 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-2 text-center md:text-left">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span>Smartfony i Tablety w Abonamencie</span>
+              </div>
+              <h3 className="font-display font-black text-xl sm:text-2xl text-white">
+                Szukasz nowego telefonu lub tabletu z umową w UK?
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl font-sans">
+                Zobacz nasze oficjalne zestawienie telefonów: Google Pixel 11, Samsung Galaxy Z, Vodafone Upgrade oraz smartfonów odnowionych (Refurbished).
+              </p>
+            </div>
+            <a
+              href="/telefony"
+              className="px-6 py-3.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#0B1F3A] font-extrabold rounded-2xl text-xs sm:text-sm transition-all shadow-md hover:shadow-lg whitespace-nowrap flex items-center gap-2 shrink-0 cursor-pointer"
+            >
+              <Smartphone className="w-4 h-4" />
+              <span>Zobacz Telefony w Abonamencie</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* AFFILIATE OFFERS GRID */}
-      <AffiliateGrid
-        title="Promocyjne Oferty SIM-Only z Szybką Zamówieniową Wysyłką"
-        subtitle="Zamów kartę SIM bezpośrednio od operatora i ciesz się darmową dostawą na brytyjski adres."
-        links={referralLinks.sim}
-        serviceTheme="sim"
-      />
+      <SimOffersGrid />
 
       {/* REVIEWS */}
       <section className="py-16 bg-white">

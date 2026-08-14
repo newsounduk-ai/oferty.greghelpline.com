@@ -1,5 +1,5 @@
 import { ServiceType } from '../types';
-import { Wifi, Zap, ShieldCheck, Palmtree, LucideIcon } from 'lucide-react';
+import { Wifi, Zap, ShieldCheck, Palmtree, LucideIcon, Lock, Scale } from 'lucide-react';
 
 export interface GuideMeta {
   title: string;
@@ -57,6 +57,22 @@ export const GUIDES_BY_SERVICE: Record<ServiceType, GuideMeta> = {
     downloads: 468,
     accent: { badgeBg: 'bg-teal-50', badgeText: 'text-teal-800', badgeBorder: 'border-teal-200', button: 'bg-teal-600', buttonHover: 'hover:bg-teal-700' },
   },
+  vpn: {
+    title: 'VPN i Bezpieczeństwo w UK',
+    description: 'Ochrona prywatności, polskie serwisy VOD za granicą i szyfrowanie połączenia.',
+    pdfPath: '/guides/Pierwsze_kroki_w_UK_GregHelpline.pdf',
+    icon: Lock,
+    downloads: 320,
+    accent: { badgeBg: 'bg-slate-100', badgeText: 'text-slate-900', badgeBorder: 'border-slate-300', button: 'bg-slate-900', buttonHover: 'hover:bg-black' },
+  },
+  prawo: {
+    title: 'Prawo i Pomoc Urzędowa',
+    description: 'Odszkodowania, prawo pracy, zasiłki, pomoc w zadłużeniach i tłumaczenia.',
+    pdfPath: '/guides/Pierwsze_kroki_w_UK_GregHelpline.pdf',
+    icon: Scale,
+    downloads: 410,
+    accent: { badgeBg: 'bg-indigo-50', badgeText: 'text-indigo-900', badgeBorder: 'border-indigo-200', button: 'bg-[#0B1F3A]', buttonHover: 'hover:bg-black' },
+  },
 };
 
 export const GENERAL_GUIDE: GuideMeta = {
@@ -82,5 +98,7 @@ export function serviceFromPath(pathname: string): ServiceType | null {
   if (pathname.startsWith('/sim')) return 'sim';
   if (pathname.startsWith('/ubezpieczenia')) return 'ubezpieczenia';
   if (pathname.startsWith('/wakacje')) return 'wakacje';
+  if (pathname.startsWith('/vpn')) return 'vpn';
+  if (pathname.startsWith('/prawo')) return 'prawo';
   return null;
 }

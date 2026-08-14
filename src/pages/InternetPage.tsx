@@ -2,7 +2,7 @@ import React from 'react';
 import { Wifi, Zap, CheckCircle2, Phone, ShieldCheck, ArrowRight, Gauge, Sparkles, HelpCircle } from 'lucide-react';
 import SpeedTestWidget from '../components/SpeedTestWidget';
 import MultiStepForm from '../components/MultiStepForm';
-import AffiliateGrid from '../components/AffiliateGrid';
+import InternetOffersGrid from '../components/InternetOffersGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection from '../components/FaqSection';
 import GuideDownloadCTA from '../components/GuideDownloadCTA';
@@ -120,12 +120,7 @@ export default function InternetPage() {
       <SpeedTestWidget />
 
       {/* AFFILIATE OFFERS GRID */}
-      <AffiliateGrid
-        title="Promocyjne Oferty Światłowodu — Zamów Od Razu Online"
-        subtitle="Wybraliśmy najlepsze oficjalne pakiety z gwarantowanym prezentem gotówkowym lub bonem Amazon."
-        links={referralLinks.internet}
-        serviceTheme="internet"
-      />
+      <InternetOffersGrid />
 
       {/* REVIEWS SLIDER */}
       <section className="py-16 bg-white">

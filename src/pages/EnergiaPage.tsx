@@ -2,7 +2,7 @@ import React from 'react';
 import { Zap, CheckCircle2, Phone, ArrowRight, TrendingDown, Sparkles } from 'lucide-react';
 import SavingsCalculator from '../components/SavingsCalculator';
 import MultiStepForm from '../components/MultiStepForm';
-import AffiliateGrid from '../components/AffiliateGrid';
+import EnergyOffersGrid from '../components/EnergyOffersGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection from '../components/FaqSection';
 import GuideDownloadCTA from '../components/GuideDownloadCTA';
@@ -117,13 +117,8 @@ export default function EnergiaPage() {
       {/* INTERACTIVE CALCULATOR */}
       <SavingsCalculator />
 
-      {/* AFFILIATE / DIRECT PARTNERS */}
-      <AffiliateGrid
-        title="Oficjalne Linki Polecające Dostawców Energii"
-        subtitle="Odbierz bonus za zmianę dostawcy bezpośrednio ze strony firmy energetycznej."
-        links={referralLinks.energia}
-        serviceTheme="energia"
-      />
+      {/* ENERGY OFFERS GRID */}
+      <EnergyOffersGrid />
 
       {/* REVIEWS */}
       <section className="py-16 bg-white">

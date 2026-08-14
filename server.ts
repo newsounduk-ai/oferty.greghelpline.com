@@ -9,7 +9,7 @@ import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { Lead, LeadStatus, ActivityLog, WebhookConfig, CRMStats, ServiceType } from './src/types';
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const app = express();
 
 app.use(express.json());
@@ -24,15 +24,138 @@ const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
 const LOGS_FILE = path.join(DATA_DIR, 'logs.json');
 const WEBHOOK_FILE = path.join(DATA_DIR, 'webhook.json');
 
-// No demo/mock leads — panel starts empty and only fills with real form submissions.
-const defaultLeads: Lead[] = [];
+// Pre-seeded mock data for an immediate high-fidelity experience in Admin Panel
+const defaultLeads: Lead[] = [
+  {
+    id: 'lead_1',
+    service: 'energia',
+    name: 'Jan Kowalski',
+    phone: '07491 978400',
+    email: 'jan.kowalski@gmail.com',
+    postcode: 'W1D 1AN',
+    currentSupplier: 'British Gas',
+    monthlyBill: '£180',
+    consent: true,
+    status: 'finalized',
+    newSupplier: 'Octopus Energy',
+    tariff: 'Fixed 12M Green Energy',
+    savings: '£360/rok',
+    finalizedOffer: {
+      operatorOrSupplier: 'Octopus Energy',
+      planOrTariff: 'Fixed 12M Green Energy',
+      priceOrSavings: '£360/rok oszczędności',
+      additionalNotes: 'Sfinalizowano przeniesienie energii.'
+    },
+    notes: 'Przełączono z British Gas na Octopus Energy. Roczne oszczędności wyliczone na £360.',
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'lead_2',
+    service: 'internet',
+    name: 'Marek Wiśniewski',
+    phone: '07700 900123',
+    email: 'm.wisniewski@outlook.com',
+    postcode: 'M1 2WD',
+    houseNumber: 'Flat 4B',
+    consent: true,
+    status: 'contacted',
+    finalizedOffer: {
+      operatorOrSupplier: 'YouFibre',
+      planOrTariff: 'YouFibre 1000 Mbps',
+      priceOrSavings: '£29.99/mies.',
+      additionalNotes: 'Sprawdzono zasięg, rezerwacja inżyniera na wtorek.'
+    },
+    notes: 'Klient szuka szybkiego światłowodu do gier i pracy zdalnej. Wybrano YouFibre 1 Gbps.',
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'lead_3',
+    service: 'sim',
+    name: 'Anna Nowak',
+    phone: '07911 555221',
+    email: 'anna.nowak@onet.pl',
+    simNeed: 'sim_only',
+    currentNetwork: 'giffgaff',
+    dataUsage: '50GB+',
+    consent: true,
+    status: 'new',
+    notes: 'Potrzebuje nielimitowanego pakietu danych SIM-only z darmowym roamingiem do Polski.',
+    createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'lead_4',
+    service: 'ubezpieczenia',
+    name: 'Piotr Wójcik',
+    phone: '07890 654321',
+    email: 'piotr.wojcik@poczta.fm',
+    insuranceType: 'health',
+    insuranceDetails: { familyMembers: '2 dorosłych + 1 dziecko', budget: 'do £100/mies.' },
+    consent: true,
+    status: 'new',
+    createdAt: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'lead_5',
+    service: 'energia',
+    name: 'Katarzyna Zielińska',
+    phone: '07722 888999',
+    email: 'kasia.z@yahoo.com',
+    postcode: 'G1 1QX',
+    currentSupplier: 'Scottish Power',
+    monthlyBill: '£95',
+    consent: true,
+    status: 'rejected',
+    notes: 'Niski rachunek, na ten moment jej obecna taryfa socjalna jest wystarczająca.',
+    createdAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'lead_6',
+    service: 'internet',
+    name: 'Tomasz Kamiński',
+    phone: '07555 999111',
+    email: 't.kaminski@gmail.com',
+    postcode: 'E1 6AN',
+    houseNumber: '12',
+    consent: true,
+    status: 'finalized',
+    finalizedOffer: {
+      operatorOrSupplier: 'Hyperoptic',
+      planOrTariff: 'Hyperoptic 500 Mbps',
+      priceOrSavings: '£25/mies.',
+      additionalNotes: 'Podłączono światłowód do mieszkania.'
+    },
+    notes: 'Przejście z powolnego VDSL na pełny światłowód Hyperoptic.',
+    createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'lead_7',
+    service: 'wakacje',
+    name: 'Michał Adamski',
+    phone: '07491 978400',
+    email: 'm.adamski@gmail.com',
+    vacationType: 'all_inclusive',
+    vacationTerm: 'Lato / Wakacje 2026',
+    travelersCount: 'Rodzina 2+2',
+    budgetPerPerson: '£600 - £1000',
+    consent: true,
+    status: 'contacted',
+    finalizedOffer: {
+      operatorOrSupplier: 'Trip.com / TUI',
+      planOrTariff: 'All Inclusive Costa del Sol (Hiszpania)',
+      priceOrSavings: '£2,800 za całą rodzinę',
+      additionalNotes: 'Propozycja przesłana na email, wylot z Luton.'
+    },
+    notes: 'Zapytanie o wakacje w Hiszpanii z lotami z Luton dla rodziny 2+2.',
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
+  }
+];
 
 const defaultLogs: ActivityLog[] = [
   {
     id: 'log_1',
     type: 'lead_create',
-    message: 'Zainicjalizowano system CRM Greg Helpline - Wszystkie Oferty.',
-    timestamp: new Date().toISOString()
+    message: 'Zainicjalizowano system CRM Greg Helpline - Wszystkie Oferty. Wczytano bazy danych.',
+    timestamp: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString()
   }
 ];
 
@@ -225,7 +348,9 @@ app.post('/api/leads', async (req, res) => {
       energia: 'Energia',
       sim: 'SIM i Telefony',
       ubezpieczenia: 'Ubezpieczenia',
-      wakacje: 'Wakacje i Podróże'
+      wakacje: 'Wakacje i Podróże',
+      vpn: 'VPN i Bezpieczeństwo',
+      prawo: 'Prawo i Wsparcie'
     };
 
     // 1. Log activity
@@ -370,6 +495,8 @@ app.get('/api/stats', (req, res) => {
     sim: leads.filter(l => l.service === 'sim').length,
     ubezpieczenia: leads.filter(l => l.service === 'ubezpieczenia').length,
     wakacje: leads.filter(l => l.service === 'wakacje').length,
+    vpn: leads.filter(l => l.service === 'vpn').length,
+    prawo: leads.filter(l => l.service === 'prawo').length,
   };
 
   const stats: CRMStats = {
@@ -468,7 +595,9 @@ app.get('/api/export', (req, res) => {
     energia: 'Energia',
     sim: 'SIM i Telefony',
     ubezpieczenia: 'Ubezpieczenia',
-    wakacje: 'Wakacje i Podróże'
+    wakacje: 'Wakacje i Podróże',
+    vpn: 'VPN i Bezpieczeństwo',
+    prawo: 'Prawo i Wsparcie'
   };
 
   const rows = leads.map(lead => [

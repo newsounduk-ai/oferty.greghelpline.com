@@ -2,6 +2,7 @@ import React from 'react';
 import { ShieldCheck, CheckCircle2, Phone, HeartPulse, Car, Home, Sparkles } from 'lucide-react';
 import InsuranceChecklist from '../components/InsuranceChecklist';
 import MultiStepForm from '../components/MultiStepForm';
+import InsuranceOffersGrid from '../components/InsuranceOffersGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection from '../components/FaqSection';
 import GuideDownloadCTA from '../components/GuideDownloadCTA';
@@ -113,6 +114,9 @@ export default function UbezpieczeniaPage() {
 
       {/* INTERACTIVE CHECKLIST */}
       <InsuranceChecklist />
+
+      {/* INSURANCE OFFERS GRID (LEADS-ONLY) */}
+      <InsuranceOffersGrid />
 
       {/* REVIEWS */}
       <section className="py-16 bg-white">

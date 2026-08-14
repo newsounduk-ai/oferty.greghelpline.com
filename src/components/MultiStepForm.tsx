@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, ArrowRight, Loader2, Search, Zap, Wifi, Smartphone, ShieldCheck, Palmtree, User, Phone, Mail, Sparkles } from 'lucide-react';
+import { Check, ArrowRight, Loader2, Search, Zap, Wifi, Smartphone, ShieldCheck, Palmtree, User, Phone, Mail, Sparkles, Lock, Scale } from 'lucide-react';
 import { ServiceType } from '../types';
 
 interface MultiStepFormProps {
@@ -34,6 +34,10 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
     vacationTerm: 'Lato / Wakacje 2026',
     travelersCount: '2 osoby (para)',
     budgetPerPerson: '£300 - £600',
+    // VPN & Prawo
+    vpnPurpose: 'Polska TV & Streaming z UK',
+    legalCategory: 'Odszkodowania i wypadki',
+    detailsNote: '',
     // Contact
     name: '',
     phone: '',
@@ -99,6 +103,28 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
       step1Subtitle: 'Wybierz typ wakacji oraz orientacyjny termin podróży z lotniska w UK.',
       step2Title: 'Krok 2: Liczba osób i budżet',
       step2Subtitle: 'Podaj liczbę podróżujących oraz planowany budżet na osobę w funtach (£).',
+    },
+    vpn: {
+      title: 'VPN i Bezpieczeństwo w Sieci',
+      icon: Lock,
+      accentColor: 'bg-slate-900 hover:bg-black text-white shadow-slate-900/20',
+      badgeColor: 'text-slate-800',
+      barColor: 'bg-slate-900',
+      step1Title: 'Krok 1: Cel stosowania VPN',
+      step1Subtitle: 'Wybierz główny powód, dla którego potrzebujesz bezpiecznego połączenia VPN.',
+      step2Title: 'Krok 2: Liczba urządzeń i wymagania',
+      step2Subtitle: 'Podaj orientacyjną liczbę urządzeń do zabezpieczenia.',
+    },
+    prawo: {
+      title: 'Prawo i Wsparcie w UK',
+      icon: Scale,
+      accentColor: 'bg-[#0B1F3A] hover:bg-blue-950 text-white shadow-blue-900/20',
+      badgeColor: 'text-[#0B1F3A]',
+      barColor: 'bg-[#0B1F3A]',
+      step1Title: 'Krok 1: Kategoria sprawy',
+      step1Subtitle: 'Wybierz obszar, w którym potrzebujesz polskojęzycznej pomocy prawnej lub urzędowej.',
+      step2Title: 'Krok 2: Krótki opis sytuacji',
+      step2Subtitle: 'Podaj najważniejsze szczegóły sprawy, abyśmy sprawnie skontaktowali Cię ze specjalistą.',
     }
   }[service];
 
@@ -247,6 +273,9 @@ export default function MultiStepForm({ service = 'energia', onSuccess, inline =
       vacationTerm: '',
       travelersCount: '2 os.',
       budgetPerPerson: '',
+      vpnPurpose: 'Polska TV & Streaming z UK',
+      legalCategory: 'Odszkodowania i wypadki',
+      detailsNote: '',
       name: '',
       phone: '',
       email: '',

@@ -4,7 +4,7 @@ import {
   Clock, HeartHandshake, PhoneCall, Sparkles, Plane, Hotel, Globe
 } from 'lucide-react';
 import MultiStepForm from '../components/MultiStepForm';
-import AffiliateGrid from '../components/AffiliateGrid';
+import VacationOffersGrid from '../components/VacationOffersGrid';
 import ReviewsSlider from '../components/ReviewsSlider';
 import FaqSection, { FaqItem } from '../components/FaqSection';
 import GuideDownloadCTA from '../components/GuideDownloadCTA';
@@ -303,13 +303,8 @@ export default function WakacjePage() {
         <VacationBudgetCalculator />
       </section>
 
-      {/* 6. AFFILIATE SECTION */}
-      <AffiliateGrid
-        links={referralLinks.wakacje}
-        serviceTheme="wakacje"
-        title="Rezerwujesz sam? Oferty naszych sprawdzonych partnerów"
-        subtitle="Kliknij poniżej, aby przejść do oficjalnego portalu Trip.com i zarezerwować loty oraz hotele z rabatem."
-      />
+      {/* 6. VACATION OFFERS GRID */}
+      <VacationOffersGrid />
 
       {/* 7. REVIEWS CAROUSEL */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

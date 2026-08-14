@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Phone, Wifi, Zap, Smartphone, ShieldCheck, Palmtree, BookOpen, Menu, X, FileText } from 'lucide-react';
+import { Phone, Wifi, Zap, Smartphone, ShieldCheck, Palmtree, BookOpen, Menu, X, FileText, Lock, Scale, Radio } from 'lucide-react';
 
 interface HeaderProps {
   onOpenAdmin?: () => void;
@@ -29,10 +29,18 @@ export default function Header({ onOpenAdmin }: HeaderProps) {
     },
     {
       path: '/sim',
-      label: 'SIM & Telefony',
-      icon: Smartphone,
+      label: 'SIM',
+      icon: Radio,
       color: 'text-purple-500',
       activeBg: 'bg-purple-50 text-purple-700',
+      badge: 'Karty SIM'
+    },
+    {
+      path: '/telefony',
+      label: 'Telefony',
+      icon: Smartphone,
+      color: 'text-amber-500',
+      activeBg: 'bg-amber-50 text-amber-900',
       badge: 'Abonament'
     },
     {
@@ -50,6 +58,22 @@ export default function Header({ onOpenAdmin }: HeaderProps) {
       color: 'text-teal-500',
       activeBg: 'bg-teal-50 text-teal-800',
       badge: 'Podróże'
+    },
+    {
+      path: '/vpn',
+      label: 'VPN',
+      icon: Lock,
+      color: 'text-slate-700',
+      activeBg: 'bg-slate-100 text-slate-900',
+      badge: 'Ochrona'
+    },
+    {
+      path: '/prawo',
+      label: 'Prawo',
+      icon: Scale,
+      color: 'text-indigo-600',
+      activeBg: 'bg-indigo-50 text-indigo-900',
+      badge: 'Wsparcie'
     },
     {
       path: '/blog',

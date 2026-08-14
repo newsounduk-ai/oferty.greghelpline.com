@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export type ServiceType = 'internet' | 'energia' | 'sim' | 'ubezpieczenia' | 'wakacje';
+export type ServiceType = 'internet' | 'energia' | 'sim' | 'ubezpieczenia' | 'wakacje' | 'vpn' | 'prawo';
 
 export type LeadStatus = 'new' | 'contacted' | 'finalized' | 'rejected';
 
