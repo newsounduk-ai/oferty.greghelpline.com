@@ -66,7 +66,7 @@ export default function App() {
           houseNumber: 'MOBILE_CTA',
           name: callbackName.trim(),
           phone: callbackPhone.trim(),
-          email: 'quick-callback@greghelpline.co.uk',
+          email: 'quick-callback@greghelpline.com',
           currentSupplier: 'Szybki Kontakt',
           monthlyBill: 'Do wyliczenia',
           consent: true
