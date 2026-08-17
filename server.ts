@@ -10,7 +10,7 @@ import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import { Lead, LeadStatus, ActivityLog, WebhookConfig, CRMStats, ServiceType, LeadScore, CustomerValueScore } from './src/types';
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 const app = express();
 
 app.use(express.json({ limit: '10mb' }));
