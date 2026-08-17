@@ -189,6 +189,35 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FEATURED BANNER: GREGHELPLINE MONEY CHECK */}
+      <section className="py-10 bg-gradient-to-r from-[#0B1F3A] via-[#101827] to-[#0B1F3A] text-white border-y border-amber-500/30 relative overflow-hidden">
+        <div className="absolute top-0 right-1/3 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-700/80 shadow-2xl">
+            <div className="space-y-2 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-extrabold uppercase tracking-wider">
+                <Sparkles className="w-4 h-4 text-amber-400" />
+                <span>GŁÓWNY SYSTEM AUDYTU KOSZTÓW</span>
+              </div>
+              <h2 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">
+                Sprawdź, czy nie przepłacasz za swoje usługi w UK
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 font-sans max-w-2xl">
+                Internet • Energia (Prąd & Gaz) • Karty SIM • Telefony • Ubezpieczenia. Wybierz dowolne usługi i odbierz bezpłatny raport oszczędności po polsku.
+              </p>
+            </div>
+
+            <NavLink
+              to="/money-check"
+              className="w-full lg:w-auto px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#0B1F3A] font-extrabold text-sm rounded-2xl transition-all shadow-xl shadow-amber-500/20 flex items-center justify-center gap-3 shrink-0 cursor-pointer transform hover:-translate-y-0.5"
+            >
+              <span>ROZPOCZNIJ MONEY CHECK</span>
+              <ArrowRight className="w-5 h-5 text-[#0B1F3A]" />
+            </NavLink>
+          </div>
+        </div>
+      </section>
+
       {/* SERVICE NAVIGATION CARDS */}
       <section className="py-16 md:py-20 bg-gray-50/60 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

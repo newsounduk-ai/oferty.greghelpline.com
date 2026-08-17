@@ -19,6 +19,7 @@ import PrawoPage from './pages/PrawoPage';
 import BlogIndexPage from './pages/BlogIndexPage';
 import BlogPostPage from './pages/BlogPostPage';
 import GuidesLibraryPage from './pages/GuidesLibraryPage';
+import MoneyCheckPage from './pages/MoneyCheckPage';
 import ExitIntentGuidePopup from './components/ExitIntentGuidePopup';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 
@@ -103,6 +104,8 @@ export default function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/money-check" element={<MoneyCheckPage />} />
+            <Route path="/sprawdz-rachunki" element={<MoneyCheckPage />} />
             <Route path="/internet" element={<InternetPage />} />
             <Route path="/energia" element={<EnergiaPage />} />
             <Route path="/sim" element={<SimPage />} />

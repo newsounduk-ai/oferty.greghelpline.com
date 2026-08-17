@@ -73,6 +73,14 @@ export const GUIDES_BY_SERVICE: Record<ServiceType, GuideMeta> = {
     downloads: 410,
     accent: { badgeBg: 'bg-indigo-50', badgeText: 'text-indigo-900', badgeBorder: 'border-indigo-200', button: 'bg-[#0B1F3A]', buttonHover: 'hover:bg-black' },
   },
+  money_check: {
+    title: 'Money Check & Audyt Rachunków UK',
+    description: 'Kompletny audyt kosztów: internet, energia, telefony i ubezpieczenia.',
+    pdfPath: '/guides/Internet_i_SIM_w_UK_GregHelpline.pdf',
+    icon: Zap,
+    downloads: 1240,
+    accent: { badgeBg: 'bg-amber-50', badgeText: 'text-amber-900', badgeBorder: 'border-amber-300', button: 'bg-amber-500', buttonHover: 'hover:bg-amber-600' },
+  },
 };
 
 export const GENERAL_GUIDE: GuideMeta = {

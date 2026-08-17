@@ -7,12 +7,57 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
-import { Lead, LeadStatus, ActivityLog, WebhookConfig, CRMStats, ServiceType } from './src/types';
+import { GoogleGenAI } from '@google/genai';
+import { Lead, LeadStatus, ActivityLog, WebhookConfig, CRMStats, ServiceType, LeadScore, CustomerValueScore } from './src/types';
 
 const PORT = 3000;
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
+
+// Lazy Google Gemini AI initialization
+let aiClient: GoogleGenAI | null = null;
+function getGeminiAI(): GoogleGenAI | null {
+  if (!aiClient && process.env.GEMINI_API_KEY) {
+    try {
+      aiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+    } catch (e) {
+      console.warn('Gemini AI initialization skipped:', e);
+    }
+  }
+  return aiClient;
+}
+
+// Generate concise AI lead summary for Greg
+async function generateLeadAISummary(lead: Lead): Promise<string | undefined> {
+  const ai = getGeminiAI();
+  if (!ai) return undefined;
+
+  try {
+    const prompt = `Jesteś analitykiem CRM dla GregHelpline (polski serwis doradztwa w UK).
+Otrzymałeś nowe zgłoszenie z systemu Money Check.
+Dane klienta:
+- Imię: ${lead.name} ${lead.lastName || ''}
+- Telefon: ${lead.phone}, E-mail: ${lead.email}
+- Postcode: ${lead.postcode || 'Brak'}
+- Wybrane usługi: ${lead.moneyCheckAnswers?.selectedServices?.join(', ') || lead.service}
+- Lead Score: ${lead.leadScore || 'Nieokreślony'} (${lead.leadScoreReason || ''})
+- Customer Value Score: ${lead.customerValueScore || 'BASIC'}
+- Odpowiedzi szczegółowe: ${JSON.stringify(lead.moneyCheckAnswers || {})}
+
+Zadanie: W 2-3 zwięzłych zdaniach po polsku przygotuj dla Grega podsumowanie priorytetu kontaktu, kluczowych potrzeb klienta i sugerowanych oszczędności / ofert. Nie wymyślaj nieistniejących cen ani fałszywych gwarancji.`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+    });
+
+    return response.text?.trim();
+  } catch (err) {
+    console.warn('Gemini summary generation warning:', err);
+    return undefined;
+  }
+}
 
 // Ensure data folder exists
 const DATA_DIR = path.join(process.cwd(), 'data');
@@ -251,16 +296,44 @@ function saveWebhook(config: WebhookConfig) {
 // REST API ROUTES
 app.get('/api/leads', (req, res) => {
   const leads = getLeads();
-  const { status, search, service } = req.query;
+  const { status, search, service, leadScore, customerValueScore, renewalFilter } = req.query;
 
   let filteredLeads = [...leads];
 
   if (service && service !== 'all') {
-    filteredLeads = filteredLeads.filter(lead => lead.service === service);
+    if (service === 'money_check') {
+      filteredLeads = filteredLeads.filter(lead => lead.service === 'money_check' || lead.isMoneyCheck);
+    } else {
+      filteredLeads = filteredLeads.filter(lead => lead.service === service);
+    }
   }
 
   if (status && status !== 'all') {
-    filteredLeads = filteredLeads.filter(lead => lead.status === status);
+    filteredLeads = filteredLeads.filter(lead => {
+      if (status === 'NEW') return lead.status === 'NEW' || lead.status === 'new';
+      if (status === 'CONTACTED') return lead.status === 'CONTACTED' || lead.status === 'contacted';
+      if (status === 'SOLD') return lead.status === 'SOLD' || lead.status === 'finalized';
+      if (status === 'LOST') return lead.status === 'LOST' || lead.status === 'rejected';
+      return lead.status === status;
+    });
+  }
+
+  if (leadScore && leadScore !== 'all') {
+    filteredLeads = filteredLeads.filter(lead => lead.leadScore === leadScore);
+  }
+
+  if (customerValueScore && customerValueScore !== 'all') {
+    filteredLeads = filteredLeads.filter(lead => lead.customerValueScore === customerValueScore);
+  }
+
+  if (renewalFilter === 'upcoming') {
+    const now = Date.now();
+    const in60Days = now + 60 * 24 * 60 * 60 * 1000;
+    filteredLeads = filteredLeads.filter(lead => {
+      if (!lead.contractEndDate) return false;
+      const end = new Date(lead.contractEndDate).getTime();
+      return !isNaN(end) && end >= now - 7 * 24 * 3600 * 1000 && end <= in60Days;
+    });
   }
 
   if (search) {
@@ -268,15 +341,16 @@ app.get('/api/leads', (req, res) => {
     filteredLeads = filteredLeads.filter(
       lead =>
         lead.name.toLowerCase().includes(s) ||
+        (lead.lastName && lead.lastName.toLowerCase().includes(s)) ||
         lead.email.toLowerCase().includes(s) ||
         lead.phone.includes(s) ||
         (lead.postcode && lead.postcode.toLowerCase().includes(s)) ||
         (lead.currentSupplier && lead.currentSupplier.toLowerCase().includes(s)) ||
         (lead.currentNetwork && lead.currentNetwork.toLowerCase().includes(s)) ||
         (lead.insuranceType && lead.insuranceType.toLowerCase().includes(s)) ||
-        (lead.vacationType && lead.vacationType.toLowerCase().includes(s)) ||
-        (lead.vacationTerm && lead.vacationTerm.toLowerCase().includes(s)) ||
-        (lead.notes && lead.notes.toLowerCase().includes(s))
+        (lead.notes && lead.notes.toLowerCase().includes(s)) ||
+        (lead.aiSummary && lead.aiSummary.toLowerCase().includes(s)) ||
+        (lead.leadScoreReason && lead.leadScoreReason.toLowerCase().includes(s))
     );
   }
 
@@ -291,11 +365,24 @@ app.post('/api/leads', async (req, res) => {
     const { 
       service, 
       name, 
+      lastName,
       phone, 
       email, 
       consent, 
+      marketingConsent,
       postcode, 
       houseNumber, 
+      preferredContact,
+      source,
+      isMoneyCheck,
+      leadScore,
+      leadScoreReason,
+      customerValueScore,
+      customerValueReason,
+      crossSellOpportunities,
+      contractEndDate,
+      renewalReminderDate,
+      moneyCheckAnswers,
       currentSupplier, 
       monthlyBill,
       simNeed,
@@ -309,7 +396,7 @@ app.post('/api/leads', async (req, res) => {
       budgetPerPerson
     } = req.body;
 
-    const chosenService: ServiceType = service || 'energia';
+    const chosenService: ServiceType = service || (isMoneyCheck ? 'money_check' : 'energia');
 
     if (!name || !phone || !email) {
       return res.status(400).json({ error: 'Proszę wypełnić wymagane dane kontaktowe (imię, telefon, email).' });
@@ -320,11 +407,24 @@ app.post('/api/leads', async (req, res) => {
       id: 'lead_' + Math.random().toString(36).substr(2, 9),
       service: chosenService,
       name: name.trim(),
+      ...(lastName && { lastName: lastName.trim() }),
       phone: phone.trim(),
       email: email.trim(),
       consent: !!consent,
-      status: 'new',
+      ...(marketingConsent !== undefined && { marketingConsent: !!marketingConsent }),
+      status: (chosenService === 'money_check' || isMoneyCheck) ? 'NEW' : 'new',
       createdAt: new Date().toISOString(),
+      ...(preferredContact && { preferredContact }),
+      ...(source && { source }),
+      ...(isMoneyCheck !== undefined && { isMoneyCheck: !!isMoneyCheck }),
+      ...(leadScore && { leadScore }),
+      ...(leadScoreReason && { leadScoreReason }),
+      ...(customerValueScore && { customerValueScore }),
+      ...(customerValueReason && { customerValueReason }),
+      ...(crossSellOpportunities && { crossSellOpportunities }),
+      ...(contractEndDate && { contractEndDate }),
+      ...(renewalReminderDate && { renewalReminderDate }),
+      ...(moneyCheckAnswers && { moneyCheckAnswers }),
       ...(postcode && { postcode: postcode.toUpperCase().trim() }),
       ...(houseNumber && { houseNumber: houseNumber.trim() }),
       ...(currentSupplier && { currentSupplier: currentSupplier.trim() }),
@@ -340,10 +440,19 @@ app.post('/api/leads', async (req, res) => {
       ...(budgetPerPerson && { budgetPerPerson: budgetPerPerson.trim() })
     };
 
+    // Opcjonalna asysta Gemini AI do podsumowania leada dla Grega
+    if (isMoneyCheck || chosenService === 'money_check') {
+      const summary = await generateLeadAISummary(newLead);
+      if (summary) {
+        newLead.aiSummary = summary;
+      }
+    }
+
     leads.push(newLead);
     saveLeads(leads);
 
     const serviceNames: Record<ServiceType, string> = {
+      money_check: 'Money Check (Audyt UK)',
       internet: 'Internet',
       energia: 'Energia',
       sim: 'SIM i Telefony',
@@ -354,12 +463,16 @@ app.post('/api/leads', async (req, res) => {
     };
 
     // 1. Log activity
-    addLog('lead_create', `Nowy lead [${serviceNames[chosenService]}]: ${newLead.name} (${newLead.phone})`, newLead.id, chosenService);
+    const logDetails = newLead.leadScore 
+      ? `Nowy lead Money Check [${newLead.leadScore} • ${newLead.customerValueScore}]: ${newLead.name} ${newLead.lastName || ''} (${newLead.phone})`
+      : `Nowy lead [${serviceNames[chosenService] || chosenService}]: ${newLead.name} (${newLead.phone})`;
+
+    addLog('lead_create', logDetails, newLead.id, chosenService);
 
     // 2. Simulated email confirmation
     addLog(
       'email_sim',
-      `[SIMULATED EMAIL] Wysłano potwierdzenie do ${newLead.name} (${newLead.email}) dla usługi: ${serviceNames[chosenService]}`,
+      `[SIMULATED EMAIL] Wysłano potwierdzenie do ${newLead.name} (${newLead.email}) dla: ${serviceNames[chosenService] || chosenService}`,
       newLead.id,
       chosenService
     );
@@ -380,6 +493,9 @@ app.post('/api/leads', async (req, res) => {
             event: 'lead.created',
             timestamp: new Date().toISOString(),
             service: chosenService,
+            isMoneyCheck: !!newLead.isMoneyCheck,
+            leadScore: newLead.leadScore,
+            customerValueScore: newLead.customerValueScore,
             data: newLead
           })
         }).then(response => {
@@ -400,6 +516,14 @@ app.post('/api/leads', async (req, res) => {
   } catch (error: any) {
     res.status(500).json({ error: 'Błąd serwera podczas zapisywania leada: ' + error.message });
   }
+});
+
+// Alias for Money Check direct submission
+app.post('/api/money-check', (req, res) => {
+  req.body.isMoneyCheck = true;
+  req.body.service = 'money_check';
+  // Forward to /api/leads logic
+  app._router.handle(req, res, () => {});
 });
 
 app.patch('/api/leads/:id', (req, res) => {
@@ -478,18 +602,44 @@ app.get('/api/stats', (req, res) => {
 
   let activeLeads = leads;
   if (service && service !== 'all') {
-    activeLeads = leads.filter(l => l.service === service);
+    if (service === 'money_check') {
+      activeLeads = leads.filter(l => l.service === 'money_check' || l.isMoneyCheck);
+    } else {
+      activeLeads = leads.filter(l => l.service === service);
+    }
   }
 
   const total = activeLeads.length;
-  const newCount = activeLeads.filter(l => l.status === 'new').length;
-  const contacted = activeLeads.filter(l => l.status === 'contacted').length;
-  const finalized = activeLeads.filter(l => l.status === 'finalized').length;
-  const rejected = activeLeads.filter(l => l.status === 'rejected').length;
+  
+  // Status counts (supporting both uppercase extended and lowercase legacy)
+  const newCount = activeLeads.filter(l => l.status === 'NEW' || l.status === 'new').length;
+  const contacted = activeLeads.filter(l => l.status === 'CONTACTED' || l.status === 'contacted').length;
+  const qualified = activeLeads.filter(l => l.status === 'QUALIFIED').length;
+  const quote = activeLeads.filter(l => l.status === 'QUOTE').length;
+  const sold = activeLeads.filter(l => l.status === 'SOLD' || l.status === 'finalized').length;
+  const crossSell = activeLeads.filter(l => l.status === 'CROSS-SELL').length;
+  const renewal = activeLeads.filter(l => l.status === 'RENEWAL').length;
+  const followUp = activeLeads.filter(l => l.status === 'FOLLOW-UP').length;
+  const rejected = activeLeads.filter(l => l.status === 'LOST' || l.status === 'rejected').length;
 
-  const conversion = total > 0 ? Math.round((finalized / total) * 100) : 0;
+  const conversion = total > 0 ? Math.round((sold / total) * 100) : 0;
+
+  // Lead scoring breakdown
+  const hotLeads = activeLeads.filter(l => l.leadScore === 'HOT').length;
+  const warmLeads = activeLeads.filter(l => l.leadScore === 'WARM').length;
+  const coldLeads = activeLeads.filter(l => l.leadScore === 'COLD').length;
+
+  // Upcoming renewals count (within next 60 days)
+  const now = Date.now();
+  const in60Days = now + 60 * 24 * 60 * 60 * 1000;
+  const renewalUpcoming = activeLeads.filter(lead => {
+    if (!lead.contractEndDate) return false;
+    const end = new Date(lead.contractEndDate).getTime();
+    return !isNaN(end) && end >= now - 7 * 24 * 3600 * 1000 && end <= in60Days;
+  }).length;
 
   const byService = {
+    money_check: leads.filter(l => l.service === 'money_check' || l.isMoneyCheck).length,
     internet: leads.filter(l => l.service === 'internet').length,
     energia: leads.filter(l => l.service === 'energia').length,
     sim: leads.filter(l => l.service === 'sim').length,
@@ -503,10 +653,29 @@ app.get('/api/stats', (req, res) => {
     totalLeads: total,
     newLeads: newCount,
     contactedLeads: contacted,
-    finalizedLeads: finalized,
+    finalizedLeads: sold,
     rejectedLeads: rejected,
     conversionRate: conversion,
-    byService
+    byService,
+    // Extended CRM stats
+    statusBreakdown: {
+      NEW: newCount,
+      CONTACTED: contacted,
+      QUALIFIED: qualified,
+      QUOTE: quote,
+      SOLD: sold,
+      'CROSS-SELL': crossSell,
+      RENEWAL: renewal,
+      'FOLLOW-UP': followUp,
+      LOST: rejected,
+    },
+    scoringBreakdown: {
+      HOT: hotLeads,
+      WARM: warmLeads,
+      COLD: coldLeads,
+    },
+    renewalsUpcomingCount: renewalUpcoming,
+    moneyCheckLeadsCount: byService.money_check
   };
 
   res.json(stats);
@@ -591,6 +760,7 @@ app.get('/api/export', (req, res) => {
   };
 
   const serviceNames: Record<ServiceType, string> = {
+    money_check: 'Money Check (Audyt UK)',
     internet: 'Internet',
     energia: 'Energia',
     sim: 'SIM i Telefony',

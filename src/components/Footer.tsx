@@ -46,6 +46,11 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
             </h4>
             <ul className="space-y-2.5 text-xs text-blue-100/90">
               <li>
+                <NavLink to="/money-check" className="hover:text-amber-400 transition-colors flex items-center gap-2 text-amber-300 font-extrabold">
+                  <span>🔥</span> Money Check (Audyt UK)
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/internet" className="hover:text-amber-400 transition-colors flex items-center gap-2">
                   <span>•</span> Internet i Światłowód
                 </NavLink>
